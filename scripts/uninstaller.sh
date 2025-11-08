@@ -21,7 +21,7 @@ while IFS= read -r line || [ -n "$line" ]; do
   for pkg in $line; do
     if [ -n "$pkg" ]; then
       echo ">>> Uninstalling $pkg..."
-      pacman -Rns --noconfirm "$pkg"
+      sudo pacman -Rns --noconfirm "$pkg"
     fi
   done
 done < "$CSV_FILE"
