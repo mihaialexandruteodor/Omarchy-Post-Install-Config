@@ -1,5 +1,5 @@
--- LEADER IN OMARCHY LAZYVIM IS 'SPACE'
--- HAS DEBUGGER CONFIGS FOR: [Java]
+-- LEADER in LazyVim is 'SPACE'
+-- Debugger configs: Java
 
 return {
   "mfussenegger/nvim-dap",
@@ -11,6 +11,7 @@ return {
     local dap = require("dap")
     local dapui = require("dapui")
 
+    -- ======= DAP UI =======
     dapui.setup()
 
     -- Open UI when debugging starts
@@ -26,13 +27,16 @@ return {
       dapui.close()
     end
 
-    -- Keymaps
+    -- ======= Keymaps =======
     vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint, {})
     vim.keymap.set('n', '<Leader>c', dap.continue, {})
+    vim.keymap.set('n', '<Leader>so', dap.step_over, {})
+    vim.keymap.set('n', '<Leader>si', dap.step_into, {})
+    vim.keymap.set('n', '<Leader>su', dap.step_out, {})
 
-    -- ====== Java DAP ADAPTER ======
-    dap.adapters.java = function(callback)
-      -- Remote JVM attach adapter (adjust port if needed)
+    -- ======= Java DAP ADAPTERS =======
+    -- Adapter for attaching to remote JVM
+    dap.adapters.java_attach = function(callback)
       callback({
         type = "server";
         host = "127.0.0.1";
@@ -40,32 +44,39 @@ return {
       })
     end
 
-    -- ====== Java DAP CONFIGURATIONS ======
-    dap.configurations.java = dap.configurations.java or {}
+    -- Adapter for launching local Java program
+    dap.adapters.java_launch = {
+      type = "executable",
+      command = "java",  -- path to your Java executable
+      args = {},         -- can leave empty, args handled in configuration
+    }
 
-    -- Attach to remote JVM example
-    table.insert(dap.configurations.java, {
-      type = "java";
-      request = "attach";
-      name = "Attach to Remote JVM";
-      hostName = "127.0.0.1";
-      port = 8000;  -- adjust to your JPDA/Tomcat port
-    })
+    -- ======= Java DAP CONFIGURATIONS =======
+    dap.configurations.java = {
+      -- Attach to remote JVM
+      {
+        type = "java_attach",
+        request = "attach",
+        name = "Attach to Remote JVM",
+        hostName = "127.0.0.1",
+        port = 8000,
+      },
 
-    -- Launch current Java file (auto-detect main class at runtime)
-    table.insert(dap.configurations.java, {
-      type = "java";
-      request = "launch";
-      name = "Launch Current Java File";
-      mainClass = function()
-        local filepath = vim.api.nvim_buf_get_name(0)
-        local main_class = filepath:gsub("^.+/java/", ""):gsub("/", "."):gsub("%.java$", "")
-        return main_class
-      end,
-      javaExec = "/usr/bin/java",
-      projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),
-      classPaths = {},
-      modulePaths = {},
-    })
+      -- Launch current Java file
+      {
+        type = "java_launch",
+        request = "launch",
+        name = "Launch Current Java File",
+        mainClass = function()
+          local filepath = vim.api.nvim_buf_get_name(0)
+          local main_class = filepath:gsub("^.+/java/", ""):gsub("/", "."):gsub("%.java$", "")
+          return main_class
+        end,
+        javaExec = "/usr/bin/java", -- adjust if needed
+        projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),
+        classPaths = {},
+        modulePaths = {},
+      },
+    }
   end,
 }
