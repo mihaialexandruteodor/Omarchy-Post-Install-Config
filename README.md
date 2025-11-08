@@ -19,7 +19,7 @@
 - []
 
 ## Extra
-- [x] nvim-dap, a package that facilitates debugging in NeoVim
+- [x] nvim-dap, [a package that facilitates debugging in NeoVim](https://youtu.be/oYzZxi3SSnM?si=jtotvG8UaPrjIwrd)
 
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
