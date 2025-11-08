@@ -9,6 +9,9 @@
 ## Check package name
 ``` pacman -Qo [program-name] ```
 
+### Run just the remapper
+``` chmod +x ./scripts/remap_hypr_bindings.sh && ./scripts/remap_hypr_bindings.sh```
+
 ## Make master script executable
 ``` chmod +x ./master_script.sh```
 
