@@ -6,7 +6,6 @@ return {
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",  -- required by nvim-dap-ui
-    "mfussenegger/nvim-jdtls", -- Java language server + DAP integration
   },
   config = function()
     local dap = require("dap")
@@ -28,6 +27,10 @@ return {
     -- ===== Helper: Compile current Java file =====
     local function compile_current_file()
       local filepath = vim.api.nvim_buf_get_name(0)
+      if filepath == "" or not filepath:match("%.java$") then
+        vim.notify("Not a Java file!", vim.log.levels.ERROR)
+        return false
+      end
       local cmd = string.format("javac %s", filepath)
       local result = vim.fn.system(cmd)
       if vim.v.shell_error ~= 0 then
@@ -38,20 +41,21 @@ return {
     end
 
     -- ===== Java DAP Adapters =====
+    -- Local Java launch
     dap.adapters.java_launch = {
-      type = 'executable',
-      command = 'java',
-      args = {}, -- DAP will fill mainClass later
+      type = "executable",
+      command = "java",
+      args = function(config)
+        return { "-classpath", vim.fn.getcwd(), config.mainClass }
+      end,
     }
 
     -- Remote JVM attach
-    dap.adapters.java_attach = function(callback)
-      callback({
-        type = "server",
-        host = "127.0.0.1",
-        port = 8000,
-      })
-    end
+    dap.adapters.java_attach = {
+      type = "server",
+      host = "127.0.0.1",
+      port = 8000,
+    }
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
@@ -60,15 +64,14 @@ return {
         type = "java_launch",
         request = "launch",
         name = "Launch Current Java File",
-        program = function()
+        mainClass = function()
           local success = compile_current_file()
-          if not success then
-            return nil
-          end
-          return vim.api.nvim_buf_get_name(0)
+          if not success then return nil end
+          local filepath = vim.api.nvim_buf_get_name(0)
+          local class_name = filepath:gsub("^.+/java/", ""):gsub("/", "."):gsub("%.java$", "")
+          return class_name
         end,
         cwd = "${workspaceFolder}",
-        stopOnEntry = false,
         console = "integratedTerminal",
       },
 
