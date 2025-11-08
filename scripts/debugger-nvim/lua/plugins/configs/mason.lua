@@ -22,7 +22,6 @@ return {
 					"docker_compose_language_service",
 					"dotls",
 					"gradle_ls",
-					"jdtls",
 					"jsonls",
 				},
 			})
