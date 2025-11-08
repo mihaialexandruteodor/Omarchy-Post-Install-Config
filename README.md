@@ -4,3 +4,4 @@
 
 #Uninstalls
 - [x] Grok webapp
+- [x] Chromium 
