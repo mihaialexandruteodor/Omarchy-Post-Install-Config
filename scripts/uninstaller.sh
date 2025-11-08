@@ -14,12 +14,11 @@ if [ ! -f "$CSV_FILE" ]; then
   exit 1
 fi
 
-# Read the CSV file and uninstall each package
-# Works with comma- or newline-separated values
 while IFS= read -r line || [ -n "$line" ]; do
-  # Replace commas with spaces so we can loop over each name
-  for pkg in $(echo "$line" | tr ',' ' '); do
-    pkg=$(echo "$pkg" | xargs) # trim whitespace
+  # Replace commas with spaces, remove extra spaces
+  line=$(echo "$line" | tr ',' ' ' | xargs)
+
+  for pkg in $line; do
     if [ -n "$pkg" ]; then
       echo ">>> Uninstalling $pkg..."
       yay -Rns --noconfirm "$pkg"
