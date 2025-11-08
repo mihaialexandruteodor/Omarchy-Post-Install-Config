@@ -17,6 +17,7 @@
 
 ## Installs
 - [x] Brave Browser
+- [x] neofetch 
 
 ## Uninstalls
 - [x] Chromium
