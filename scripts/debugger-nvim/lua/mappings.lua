@@ -149,7 +149,7 @@ wk.add({
 	-- {"<leader>ct", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc= "[LSP] Go to type definition" },
 	{ "<leader>ci", "<cmd>Telescope lsp_implementations<cr>", desc = "[LSP] Go to implementation" },
 	-- {"<leader>ci", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc= "[LSP] Go to implementation" },
-	{ "<leader>cs", "<cmd>lua require'jdtls'.super_implementation()<cr>", desc = "[JDLTS] Go to super implementation" },
+	-- { "<leader>cs", "<cmd>lua require'jdtls'.super_implementation()<cr>", desc = "[JDLTS] Go to super implementation" },
 	{ "<leader>cr", "<cmd>Telescope lsp_references<cr>", desc = "[LSP] Go to references" },
 	-- {"<leader>cr", "<cmd>lua vim.lsp.buf.references()<cr>", desc= "[LSP] Go to references" },
 	{ "<leader>cv", "<cmd>Lspsaga hover_doc<cr>", desc = "[LSP] Hover" },
