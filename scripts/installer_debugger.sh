@@ -23,4 +23,11 @@ mkdir -p "$DEST_DIR"
 echo "Copying files from $SRC_DIR to $DEST_DIR..."
 cp -r "$SRC_DIR"/* "$DEST_DIR"/
 
-echo "✅ Done! All files from 'debugger-nvim' have been copied to ~/.config/nvim"
+echo "Files copied successfully!"
+
+# --- Automatically update LazyVim plugins ---
+echo "Updating LazyVim plugins..."
+nvim --headless +"Lazy! update" +qa
+
+echo "LazyVim plugins updated!"
+
