@@ -4,6 +4,8 @@
 
 [Omarchy wiki - remove packages](https://learn.omacom.io/2/the-omarchy-manual/66/other-packages?search=remove)
 
+[Also check: Omarchy Cleaner](https://github.com/maxart/omarchy-cleaner)
+
 ## Make master script executable
 ``` chmod +x ./master_script.sh```
 
