@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-echo "Setting up LazyVim debugger configuration..."
+echo "Moving debugger.lua to LazyVim plugins folder..."
 
 # Path to this script's directory
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -22,7 +22,5 @@ mkdir -p "$CONFIG_DEST"
 # Move the Lua config file
 mv "$CONFIG_SRC" "$CONFIG_DEST"
 
-echo "Syncing LazyVim plugins (this will install nvim-dap and nvim-dap-ui if listed in debugger.lua)..."
-nvim --headless "+Lazy! sync" "+qall"
-
-echo "LazyVim debugger setup complete."
+echo "debugger.lua moved successfully."
+echo "Run 'nvim' and LazyVim will install nvim-dap and nvim-dap-ui automatically."
