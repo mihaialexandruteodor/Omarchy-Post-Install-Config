@@ -1,33 +1,26 @@
 #!/bin/sh
 set -e
 
-echo "Installing Neovim plugin configs for LazyVim..."
+echo "Installing Neovim debugger configs..."
 
 # Path to this script's directory
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Source files
-DEBUGGER_SRC="$SCRIPT_DIR/debugger.lua"
-JAVA_SRC="$SCRIPT_DIR/java.lua"
-NVIM_JAVA_SRC="$SCRIPT_DIR/nvim-java.lua"
+# Source and destination
+SRC_DIR="$SCRIPT_DIR/debugger-nvim"
+DEST_DIR="$HOME/.config/nvim"
 
-# Destination folder
-CONFIG_DEST="$HOME/.config/nvim/lua/plugins/"
+# --- Verify source folder exists ---
+if [ ! -d "$SRC_DIR" ]; then
+  echo "Error: Source folder '$SRC_DIR' not found!"
+  exit 1
+fi
 
-# --- Verify files exist ---
-for FILE in "$DEBUGGER_SRC" "$JAVA_SRC" "$NVIM_JAVA_SRC"; do
-  if [ ! -f "$FILE" ]; then
-    echo "Error: $(basename "$FILE") not found in $SCRIPT_DIR"
-    exit 1
-  fi
-done
+# --- Create destination folder if needed ---
+mkdir -p "$DEST_DIR"
 
-# --- Create destination directory if it doesn't exist ---
-mkdir -p "$CONFIG_DEST"
+# --- Copy files recursively, overwriting existing ones ---
+echo "Copying files from $SRC_DIR to $DEST_DIR..."
+cp -r "$SRC_DIR"/* "$DEST_DIR"/
 
-# --- Copy all files ---
-cp "$DEBUGGER_SRC" "$JAVA_SRC" "$NVIM_JAVA_SRC" "$CONFIG_DEST"
-
-echo "Files copied successfully to: $CONFIG_DEST"
-echo "Copied files:"
-ls -1 "$CONFIG_DEST" | grep -E 'debugger\.lua|java\.lua|nvim-java\.lua' || echo "No files found!"
+echo "✅ Done! All files from 'debugger-nvim' have been copied to ~/.config/nvim"
