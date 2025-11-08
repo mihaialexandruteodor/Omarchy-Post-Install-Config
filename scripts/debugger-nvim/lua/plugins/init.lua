@@ -17,7 +17,7 @@ if not ok then
 	return
 end
 
-require("lsp.configs.nvim-java").setup()
+require("java").setup()
 require("lspconfig").jdtls.setup {}
 
 
