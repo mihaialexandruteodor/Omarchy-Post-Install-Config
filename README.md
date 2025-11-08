@@ -2,6 +2,9 @@
 
 [typecraft video](https://www.youtube.com/watch?v=d23jFJmcaMI)
 
+## Make master script executable
+``` chmod +x ./master_script.sh```
+
 ## Uninstalls
 - [x] Grok webapp
 - [x] Chromium
