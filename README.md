@@ -12,8 +12,8 @@
 ### Run just the remapper
 ``` chmod +x ./scripts/remapper.sh && ./scripts/remapper.sh ```
 
-## Make master script executable
-``` chmod +x ./master_script.sh```
+## Run master script
+``` chmod +x ./master_script.sh && ./master_script.sh```
 
 ## Installs
 - [x] Brave Browser
