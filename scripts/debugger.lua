@@ -1,4 +1,3 @@
--- LazyVim Java DAP Configuration (Corrected)
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
@@ -23,23 +22,23 @@ return {
     vim.keymap.set("n", "<Leader>so", dap.step_over, {})
     vim.keymap.set("n", "<Leader>si", dap.step_into, {})
     vim.keymap.set("n", "<Leader>su", dap.step_out, {})
+    vim.keymap.set("n", "<Leader>dr", dap.repl.open, {})
+    vim.keymap.set("n", "<Leader>dl", dap.run_last, {})
 
     -- ===== Java DAP Adapters =====
-    -- Local launch adapter
     dap.adapters.java = {
       type = "executable",
-      command = "java", -- Java runtime
+      command = "java",
       args = function(config)
         if not config.mainClass then
           vim.notify("No main class provided", vim.log.levels.ERROR)
           return {}
         end
-        local classpath = vim.loop.cwd() -- default: current project
-        return { "-classpath", classpath, config.mainClass }
+        local cp = vim.loop.cwd()
+        return { "-classpath", cp, config.mainClass }
       end,
     }
 
-    -- Remote attach adapter
     dap.adapters.java_attach = {
       type = "server",
       host = "127.0.0.1",
@@ -48,24 +47,31 @@ return {
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
-      -- Launch current project / main class
+      -- Launch project / main class (Maven/Gradle)
       {
         type = "java",
         request = "launch",
-        name = "Launch Current Java File",
+        name = "Launch Project / Main Class",
         mainClass = function()
           local ok, main_class = pcall(jdtls.get_main_class)
-          if not ok or not main_class or main_class == "" then
-            vim.notify("Could not determine main class", vim.log.levels.ERROR)
-            return nil
+          if ok and main_class and main_class ~= "" then
+            return main_class
+          else
+            -- Fallback to automatic single-file detection
+            local class = get_single_file_main_class()
+            if class then
+              return class
+            else
+              vim.notify("Could not determine main class", vim.log.levels.ERROR)
+              return nil
+            end
           end
-          return main_class
         end,
-        cwd = "${workspaceFolder}",
+        cwd = vim.loop.cwd(),
         console = "integratedTerminal",
       },
 
-      -- Attach to remote JVM
+      -- Remote attach
       {
         type = "java_attach",
         request = "attach",
