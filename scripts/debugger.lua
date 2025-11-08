@@ -58,11 +58,15 @@ return {
       type = "java";
       request = "launch";
       name = "Launch Current Java File";
-      mainClass = detect_main_class(),
-      javaExec = "/usr/bin/java",  -- adjust to your JDK path
-      projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),  -- current folder as project name
-      classPaths = {},   -- will be auto-filled by nvim-jdtls if available
-      modulePaths = {},  -- optional
+      mainClass = function()
+        local filepath = vim.api.nvim_buf_get_name(0)
+        local main_class = filepath:gsub("^.+/java/", ""):gsub("/", "."):gsub("%.java$", "")
+        return main_class
+      end,
+      javaExec = "/usr/bin/java",
+      projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),
+      classPaths = {},
+      modulePaths = {},
     })
   end,
 }
