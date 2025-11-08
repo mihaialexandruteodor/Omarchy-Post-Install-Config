@@ -4,4 +4,10 @@
 
 ## Uninstalls
 - [x] Grok webapp
-- [x] Chromium 
+- [x] Chromium
+
+## Installs
+- []
+
+## Keybind modifications
+- []
