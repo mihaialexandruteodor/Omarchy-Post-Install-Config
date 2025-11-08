@@ -1,12 +1,10 @@
--- LazyVim Java DAP Configuration
--- Leader is <Space>
-
+-- LazyVim Java DAP Configuration (Corrected)
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
     "rcarriga/nvim-dap-ui",
-    "nvim-neotest/nvim-nio",  -- required by dap-ui
-    "mfussenegger/nvim-jdtls", -- Java LSP + DAP integration
+    "nvim-neotest/nvim-nio",
+    "mfussenegger/nvim-jdtls",
   },
   config = function()
     local dap = require("dap")
@@ -25,45 +23,46 @@ return {
     vim.keymap.set("n", "<Leader>so", dap.step_over, {})
     vim.keymap.set("n", "<Leader>si", dap.step_into, {})
     vim.keymap.set("n", "<Leader>su", dap.step_out, {})
-    vim.keymap.set("n", "<Leader>dr", dap.repl.open, {})
-    vim.keymap.set("n", "<Leader>dl", dap.run_last, {})
 
     -- ===== Java DAP Adapters =====
-    dap.adapters.java = function(callback)
-      local bundles = jdtls.get_debug_bundles()
-      callback({
-        type = "server",
-        host = "127.0.0.1",
-        port = 5005,  -- JDWP port used by jdtls debug
-        options = { cwd = vim.loop.cwd() },
-      })
-    end
+    -- Local launch adapter
+    dap.adapters.java = {
+      type = "executable",
+      command = "java", -- Java runtime
+      args = function(config)
+        if not config.mainClass then
+          vim.notify("No main class provided", vim.log.levels.ERROR)
+          return {}
+        end
+        local classpath = vim.loop.cwd() -- default: current project
+        return { "-classpath", classpath, config.mainClass }
+      end,
+    }
 
+    -- Remote attach adapter
     dap.adapters.java_attach = {
       type = "server",
       host = "127.0.0.1",
-      port = 8000,  -- adjust to your remote JDWP port
+      port = 8000,
     }
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
-      -- Launch current Java project / main class
+      -- Launch current project / main class
       {
         type = "java",
         request = "launch",
-        name = "Launch Current Java Project",
+        name = "Launch Current Java File",
         mainClass = function()
           local ok, main_class = pcall(jdtls.get_main_class)
           if not ok or not main_class or main_class == "" then
-            vim.notify("Could not determine main class. Make sure your project has a main method.", vim.log.levels.ERROR)
+            vim.notify("Could not determine main class", vim.log.levels.ERROR)
             return nil
           end
           return main_class
         end,
-        projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),
-        classPaths = {},   -- auto-filled by jdtls
-        modulePaths = {},  -- auto-filled by jdtls
-        console = "integratedTerminal",  -- VS Code-like behavior
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
       },
 
       -- Attach to remote JVM
