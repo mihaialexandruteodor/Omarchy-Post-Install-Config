@@ -26,6 +26,7 @@
 
 ## Debugger
 [Debug Adapter Wiki](https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
+
 [Configuration based on this repo](https://github.com/magidc/nvim-config/tree/master)
 
 
