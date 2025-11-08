@@ -16,7 +16,7 @@ fi
 
 # Update package database first
 echo ">>> Updating package database..."
-sudo pacman -Syu --noconfirm
+sudo yay -Syu --noconfirm
 
 # Read each line of the CSV file
 while IFS= read -r line || [ -n "$line" ]; do
@@ -26,7 +26,7 @@ while IFS= read -r line || [ -n "$line" ]; do
   for pkg in $line; do
     if [ -n "$pkg" ]; then
       echo ">>> Installing $pkg..."
-      sudo pacman -S --noconfirm --needed "$pkg"
+      sudo yay -S --noconfirm --needed "$pkg"
     fi
   done
 done < "$CSV_FILE"
