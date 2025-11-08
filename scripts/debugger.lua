@@ -1,15 +1,17 @@
--- LEADER in LazyVim is 'SPACE'
--- Debugger configs: Java (local launch + remote attach)
+-- LazyVim Java DAP Configuration
+-- Leader is <Space>
 
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
     "rcarriga/nvim-dap-ui",
-    "nvim-neotest/nvim-nio",
+    "nvim-neotest/nvim-nio",  -- required by dap-ui
+    "mfussenegger/nvim-jdtls", -- Java LSP + DAP integration
   },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
+    local jdtls = require("jdtls")
 
     -- ===== DAP UI =====
     dapui.setup()
@@ -18,78 +20,50 @@ return {
     dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
     -- ===== Keymaps =====
-    vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint, {})
-    vim.keymap.set('n', '<Leader>c', dap.continue, {})
-    vim.keymap.set('n', '<Leader>so', dap.step_over, {})
-    vim.keymap.set('n', '<Leader>si', dap.step_into, {})
-    vim.keymap.set('n', '<Leader>su', dap.step_out, {})
-
-    -- ===== Helper: Compile current Java file =====
-    local function compile_current_file()
-      local filepath = vim.api.nvim_buf_get_name(0)
-      if filepath == "" or not filepath:match("%.java$") then
-        vim.notify("Not a Java file!", vim.log.levels.ERROR)
-        return false
-      end
-
-      -- Run javac
-      local cmd = string.format("javac %s", filepath)
-      local result = vim.fn.system(cmd)
-      if vim.v.shell_error ~= 0 then
-        vim.notify("Compilation failed:\n" .. result, vim.log.levels.ERROR)
-        return false
-      end
-      return true
-    end
+    vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, {})
+    vim.keymap.set("n", "<Leader>c", dap.continue, {})
+    vim.keymap.set("n", "<Leader>so", dap.step_over, {})
+    vim.keymap.set("n", "<Leader>si", dap.step_into, {})
+    vim.keymap.set("n", "<Leader>su", dap.step_out, {})
+    vim.keymap.set("n", "<Leader>dr", dap.repl.open, {})
+    vim.keymap.set("n", "<Leader>dl", dap.run_last, {})
 
     -- ===== Java DAP Adapters =====
-    -- Local launch
-    dap.adapters.java_launch = {
-      type = "executable",
-      command = "java",
-      args = function(config)
-        if not config.mainClass then
-          vim.notify("No main class, aborting Java launch.", vim.log.levels.ERROR)
-          return {}
-        end
+    dap.adapters.java = function(callback)
+      local bundles = jdtls.get_debug_bundles()
+      callback({
+        type = "server",
+        host = "127.0.0.1",
+        port = 5005,  -- JDWP port used by jdtls debug
+        options = { cwd = vim.loop.cwd() },
+      })
+    end
 
-        -- For Maven/Gradle projects, adjust classpath if needed
-        local classpath = vim.fn.getcwd()
-        print("Java command:", "java -classpath " .. classpath .. " " .. config.mainClass)
-        return { "-classpath", classpath, config.mainClass }
-      end,
-    }
-
-    -- Remote JVM attach
     dap.adapters.java_attach = {
       type = "server",
       host = "127.0.0.1",
-      port = 8000,
+      port = 8000,  -- adjust to your remote JDWP port
     }
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
-      -- Launch current file
+      -- Launch current Java project / main class
       {
-        type = "java_launch",
+        type = "java",
         request = "launch",
-        name = "Launch Current Java File",
+        name = "Launch Current Java Project",
         mainClass = function()
-          if not compile_current_file() then
+          local ok, main_class = pcall(jdtls.get_main_class)
+          if not ok or not main_class or main_class == "" then
+            vim.notify("Could not determine main class. Make sure your project has a main method.", vim.log.levels.ERROR)
             return nil
           end
-
-          local filepath = vim.api.nvim_buf_get_name(0)
-          local class_name = filepath:gsub("^.+/java/", ""):gsub("/", "."):gsub("%.java$", "")
-          if class_name == "" then
-            vim.notify("Could not determine main class.", vim.log.levels.ERROR)
-            return nil
-          end
-
-          return class_name
+          return main_class
         end,
-        cwd = "${workspaceFolder}",
-        console = "integratedTerminal",
+        projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),
+        classPaths = {},   -- auto-filled by jdtls
+        modulePaths = {},  -- auto-filled by jdtls
+        console = "integratedTerminal",  -- VS Code-like behavior
       },
 
       -- Attach to remote JVM
