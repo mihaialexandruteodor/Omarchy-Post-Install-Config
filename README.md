@@ -22,9 +22,18 @@
 ## Uninstalls
 - [x] Chromium
 
-## Extra
+## Debugger
+[Debug Adapter Wiki](https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
 - [x] nvim-dap, [a package that facilitates debugging in NeoVim](https://youtu.be/oYzZxi3SSnM?si=jtotvG8UaPrjIwrd)
 - [x] nvim-dap-ui
+
+### Current configs working:
+- [x] Java
+      
+### Keymaps (leader is SPACE in Omarchy by default, launch Lazyvim inline with nvim or as a new window with Super + Shift + n)
+ ``` Leader + b -> toggle breakpoint ```
+ 
+ ``` Leader + c -> continue ```
 
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
