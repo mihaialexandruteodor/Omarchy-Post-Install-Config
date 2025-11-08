@@ -17,6 +17,10 @@ if not ok then
 	return
 end
 
+require("lsp.configs.nvim-java").setup()
+require("lspconfig").jdtls.setup {}
+
+
 local theme = require("theme")
 local plugins = {
 	---- UI
@@ -69,9 +73,9 @@ local plugins = {
 
 	---- LSP/DAP
 	require("plugins.configs.mason"),
-	"neovim/nvim-lspconfig",
+	--"neovim/nvim-lspconfig",
     require("lsp.configs.dap"),
-	require("lsp.configs.nvim-java"),
+	-- require("lsp.configs.nvim-java"),
 	-- require("lsp.configs.python"),
 
 	---- Snippets
