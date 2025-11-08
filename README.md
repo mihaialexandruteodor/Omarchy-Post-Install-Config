@@ -12,11 +12,11 @@
 ## Make master script executable
 ``` chmod +x ./master_script.sh```
 
+## Installs
+- [x] Brave Browser
+
 ## Uninstalls
 - [x] Chromium
-
-## Installs
-- []
 
 ## Extra
 - [x] nvim-dap, [a package that facilitates debugging in NeoVim](https://youtu.be/oYzZxi3SSnM?si=jtotvG8UaPrjIwrd)
