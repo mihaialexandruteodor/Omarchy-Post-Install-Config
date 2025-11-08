@@ -10,6 +10,25 @@ return {
     local dapui = require("dapui")
     local jdtls = require("jdtls")
 
+    -- ===== Helper: single-file main class detection =====
+    local function get_single_file_main_class()
+      local bufname = vim.api.nvim_buf_get_name(0)
+      if bufname == "" then return nil end
+
+      -- Convert path to Java class
+      local filename = vim.fn.fnamemodify(bufname, ":p")
+      local src_index = filename:find("/src/")
+      local class_path = filename
+      if src_index then
+        class_path = filename:sub(src_index + 5) -- skip "/src/"
+      else
+        class_path = vim.fn.fnamemodify(filename, ":.")
+      end
+      class_path = class_path:gsub("%.java$", "")
+      class_path = class_path:gsub("/", ".")
+      return class_path
+    end
+
     -- ===== DAP UI =====
     dapui.setup()
     dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
@@ -47,7 +66,6 @@ return {
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
-      -- Launch project / main class (Maven/Gradle)
       {
         type = "java",
         request = "launch",
@@ -57,7 +75,7 @@ return {
           if ok and main_class and main_class ~= "" then
             return main_class
           else
-            -- Fallback to automatic single-file detection
+            -- fallback to automatic single-file detection
             local class = get_single_file_main_class()
             if class then
               return class
