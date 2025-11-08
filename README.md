@@ -18,6 +18,9 @@
 ## Installs
 - []
 
+## Extra
+- [x] nvim-dap, a package that facilitates debugging in NeoVim
+
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
 
