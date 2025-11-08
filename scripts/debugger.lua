@@ -30,7 +30,17 @@ return {
     vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint, {})
     vim.keymap.set('n', '<Leader>c', dap.continue, {})
 
-    -- ====== Java DAP CONFIG ======
+    -- ====== Java DAP ADAPTER ======
+    dap.adapters.java = function(callback)
+      -- Remote JVM attach adapter (adjust port if needed)
+      callback({
+        type = "server";
+        host = "127.0.0.1";
+        port = 8000;
+      })
+    end
+
+    -- ====== Java DAP CONFIGURATIONS ======
     dap.configurations.java = dap.configurations.java or {}
 
     -- Attach to remote JVM example
@@ -42,18 +52,7 @@ return {
       port = 8000;  -- adjust to your JPDA/Tomcat port
     })
 
-    -- Auto-detect main class from current buffer
-    local function detect_main_class()
-      local filepath = vim.api.nvim_buf_get_name(0)
-      -- Convert path to package style: src/main/java/com/example/Main.java -> com.example.Main
-      local main_class = filepath
-      main_class = main_class:gsub("^.+/java/", "")       -- remove leading path up to 'java/'
-      main_class = main_class:gsub("/", ".")             -- replace slashes with dots
-      main_class = main_class:gsub("%.java$", "")        -- remove .java extension
-      return main_class
-    end
-
-    -- Launch current Java file
+    -- Launch current Java file (auto-detect main class at runtime)
     table.insert(dap.configurations.java, {
       type = "java";
       request = "launch";
