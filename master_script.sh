@@ -6,5 +6,5 @@ echo "Starting config for $(whoami)"
 chmod +x ./scripts/*.sh
 
 ./scripts/uninstaller.sh
-
+./scripts/installer_debugger.sh
 ./scripts/themes.sh
