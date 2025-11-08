@@ -22,6 +22,7 @@
    - Name the VM and select the target Linux distro
    - Allocate RAM and CPU (e.g., 2GB RAM, 2 CPU cores)
    - Create a virtual hard disk (VDI, dynamically allocated, ~20GB+)
+   - Use Graphics Controller VBoxSVGA (Important!)
 
 2. Install the Linux OS:
    - Start the VM and boot from the installation ISO
