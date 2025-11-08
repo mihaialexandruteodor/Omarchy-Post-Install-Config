@@ -6,6 +6,9 @@
 
 [Also check: Omarchy Cleaner](https://github.com/maxart/omarchy-cleaner)
 
+## Check package name
+``` pacman -Qo [package-name] ```
+
 ## Make master script executable
 ``` chmod +x ./master_script.sh```
 
