@@ -10,7 +10,7 @@
 ``` pacman -Qo [program-name] ```
 
 ### Run just the remapper
-``` chmod +x ./scripts/remap_hypr_bindings.sh && ./scripts/remap_hypr_bindings.sh```
+``` chmod +x ./scripts/remapper.sh && ./scripts/remapper.sh ```
 
 ## Make master script executable
 ``` chmod +x ./master_script.sh```
