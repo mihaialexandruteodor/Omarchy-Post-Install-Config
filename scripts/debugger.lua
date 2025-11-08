@@ -5,7 +5,7 @@ return {
   "mfussenegger/nvim-dap",
   dependencies = {
     "rcarriga/nvim-dap-ui",
-    "nvim-neotest/nvim-nio",  -- required by nvim-dap-ui
+    "nvim-neotest/nvim-nio",
   },
   config = function()
     local dap = require("dap")
@@ -31,6 +31,8 @@ return {
         vim.notify("Not a Java file!", vim.log.levels.ERROR)
         return false
       end
+
+      -- Run javac
       local cmd = string.format("javac %s", filepath)
       local result = vim.fn.system(cmd)
       if vim.v.shell_error ~= 0 then
@@ -41,12 +43,20 @@ return {
     end
 
     -- ===== Java DAP Adapters =====
-    -- Local Java launch
+    -- Local launch
     dap.adapters.java_launch = {
       type = "executable",
       command = "java",
       args = function(config)
-        return { "-classpath", vim.fn.getcwd(), config.mainClass }
+        if not config.mainClass then
+          vim.notify("No main class, aborting Java launch.", vim.log.levels.ERROR)
+          return {}
+        end
+
+        -- For Maven/Gradle projects, adjust classpath if needed
+        local classpath = vim.fn.getcwd()
+        print("Java command:", "java -classpath " .. classpath .. " " .. config.mainClass)
+        return { "-classpath", classpath, config.mainClass }
       end,
     }
 
@@ -59,16 +69,23 @@ return {
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
-      -- Launch current Java file
+      -- Launch current file
       {
         type = "java_launch",
         request = "launch",
         name = "Launch Current Java File",
         mainClass = function()
-          local success = compile_current_file()
-          if not success then return nil end
+          if not compile_current_file() then
+            return nil
+          end
+
           local filepath = vim.api.nvim_buf_get_name(0)
           local class_name = filepath:gsub("^.+/java/", ""):gsub("/", "."):gsub("%.java$", "")
+          if class_name == "" then
+            vim.notify("Could not determine main class.", vim.log.levels.ERROR)
+            return nil
+          end
+
           return class_name
         end,
         cwd = "${workspaceFolder}",
