@@ -32,6 +32,9 @@
 ## Keybind modifications
 - []
 
+------
+## Debug Neovim config
+``` nvim --headless -c 'luafile ~/.config/nvim/lua/plugins/debugger.lua' ```
 
 ------
 
