@@ -10,7 +10,7 @@ return {
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",
       {
-        "williamboman/mason.nvim,
+        "williamboman/mason.nvim",
         opts = {
           registries = {
               "github:nvim-java/mason-registry",
