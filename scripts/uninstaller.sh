@@ -6,7 +6,7 @@ echo "Starting to uninstall undesired programs..."
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
 # CSV file path (same directory as script)
-CSV_FILE="$SCRIPT_DIR/packages.csv"
+CSV_FILE="$SCRIPT_DIR/packages_uninstall.csv"
 
 # Check if the CSV file exists
 if [ ! -f "$CSV_FILE" ]; then
