@@ -7,7 +7,6 @@
 ``` chmod +x ./master_script.sh```
 
 ## Uninstalls
-- [x] Grok webapp
 - [x] Chromium
 
 ## Installs
