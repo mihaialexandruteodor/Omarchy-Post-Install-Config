@@ -11,7 +11,6 @@ return {
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
-    local jdtls = require("jdtls")
 
     -- ===== DAP UI =====
     dapui.setup()
@@ -26,18 +25,24 @@ return {
     vim.keymap.set('n', '<Leader>si', dap.step_into, {})
     vim.keymap.set('n', '<Leader>su', dap.step_out, {})
 
-    -- ===== Java DAP Adapters =====
-    -- Local Java launch using nvim-jdtls
-    dap.adapters.java_launch = function(callback, config)
-      -- Get debug bundles from jdtls
-      local bundles = jdtls.get_debug_bundles()
-      callback({
-        type = 'server',
-        host = '127.0.0.1',
-        port = config.port or 5005,
-        options = { cwd = vim.loop.cwd() },
-      })
+    -- ===== Helper: Compile current Java file =====
+    local function compile_current_file()
+      local filepath = vim.api.nvim_buf_get_name(0)
+      local cmd = string.format("javac %s", filepath)
+      local result = vim.fn.system(cmd)
+      if vim.v.shell_error ~= 0 then
+        vim.notify("Compilation failed:\n" .. result, vim.log.levels.ERROR)
+        return false
+      end
+      return true
     end
+
+    -- ===== Java DAP Adapters =====
+    dap.adapters.java_launch = {
+      type = 'executable',
+      command = 'java',
+      args = {}, -- DAP will fill mainClass later
+    }
 
     -- Remote JVM attach
     dap.adapters.java_attach = function(callback)
@@ -50,16 +55,21 @@ return {
 
     -- ===== Java Configurations =====
     dap.configurations.java = {
-      -- Launch current Java project/main class
+      -- Launch current Java file
       {
         type = "java_launch",
         request = "launch",
-        name = "Launch Current Java Project",
-        mainClass = function()
-          -- automatically detect main class using jdtls
-          return jdtls.get_main_class()
+        name = "Launch Current Java File",
+        program = function()
+          local success = compile_current_file()
+          if not success then
+            return nil
+          end
+          return vim.api.nvim_buf_get_name(0)
         end,
-        projectName = vim.fn.fnamemodify(vim.loop.cwd(), ":t"),
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        console = "integratedTerminal",
       },
 
       -- Attach to remote JVM
