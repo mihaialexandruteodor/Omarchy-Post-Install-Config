@@ -19,6 +19,7 @@
 - [x] Brave Browser
 - [x] neofetch
 - [x] eslint
+- [x] gradle
 
 ## Uninstalls
 - [x] Chromium
