@@ -18,6 +18,9 @@
 ## Installs
 - []
 
+## Themes
+- [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
+
 ## Keybind modifications
 - []
 
