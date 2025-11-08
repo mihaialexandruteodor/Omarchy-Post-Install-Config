@@ -29,7 +29,7 @@
 - [x] nvim-dap-ui
 
 ### Current configs working:
-- [x] Java
+- [x] Java [Powered by nvim-java](https://github.com/nvim-java/nvim-java)
       
 ### Keymaps (leader is SPACE in Omarchy by default, launch Lazyvim inline with nvim or as a new window with Super + Shift + n)
  ``` Leader + b -> toggle breakpoint ```
