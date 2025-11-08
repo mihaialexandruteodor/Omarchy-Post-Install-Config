@@ -1,6 +1,7 @@
 # Omarchy post install config
 
 [typecraft video](https://www.youtube.com/watch?v=d23jFJmcaMI)
+[Omarchy wiki - remove packages](https://learn.omacom.io/2/the-omarchy-manual/66/other-packages?search=remove)
 
 ## Make master script executable
 ``` chmod +x ./master_script.sh```
