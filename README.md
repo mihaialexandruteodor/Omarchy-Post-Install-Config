@@ -38,6 +38,7 @@ cd /tmp && rm -rf Omarchy-Post-Install-Config
 - [x] Chromium
 
 ## Debugger
+<img src="./debug_java.png" width="75%"/>
 Debugging works out of the box in Omarchy LazyVim, luckily. Yes, even Java!
 
 Open LazyVim with `Leader+Shift+n` or `nvim` in terminal
