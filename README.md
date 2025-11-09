@@ -2,10 +2,12 @@
 
 ## Run in one command (also installs wget)
 ```
-sudo pacman -Syu --noconfirm wget && \
-wget -O /tmp/master_script.sh https://raw.githubusercontent.com/mihaialexandruteodor/Omarchy-Post-Install-Config/main/master_script.sh && \
-chmod +x /tmp/master_script.sh && \
-bash /tmp/master_script.sh
+sudo pacman -Syu --noconfirm git wget && \
+git clone https://github.com/mihaialexandruteodor/Omarchy-Post-Install-Config.git /tmp/Omarchy-Post-Install-Config && \
+chmod +x /tmp/Omarchy-Post-Install-Config/master_script.sh && \
+bash /tmp/Omarchy-Post-Install-Config/master_script.sh && \
+rm -rf /tmp/Omarchy-Post-Install-Config
+
 ```
 
 ## Links
