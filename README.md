@@ -27,18 +27,9 @@
 ## Debugger
 [Debug Adapter Wiki](https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
 
-[Configuration based on this repo](https://github.com/magidc/nvim-config/tree/master)
-
 
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
-
-## Keybind modifications
-- []
-
-------
-## Debug Neovim config
-``` nvim --headless -c 'luafile ~/.config/nvim/lua/plugins/debugger.lua' ```
 
 ------
 
