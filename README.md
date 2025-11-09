@@ -1,7 +1,8 @@
 # Omarchy post install config
 
 ## Run in one command (also installs wget)
-```sudo pacman -Syu --noconfirm wget && \
+```
+sudo pacman -Syu --noconfirm wget && \
 wget -O /tmp/master_script.sh https://raw.githubusercontent.com/mihaialexandruteodor/Omarchy-Post-Install-Config/main/master_script.sh && \
 chmod +x /tmp/master_script.sh && \
 bash /tmp/master_script.sh
