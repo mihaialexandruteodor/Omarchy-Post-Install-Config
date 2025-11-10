@@ -1,17 +1,21 @@
 #!/bin/bash
 
 # 1️ Create wallpapers folder and download GitHub wallpapers
-mkdir -p ~/Documents/wallpapers/live && \
-git clone --depth 1 https://github.com/mihaialexandruteodor/wallpaper-stash.git /tmp/wallpaper-stash && \
-cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/ && \
+mkdir -p ~/Documents/wallpapers/live
+git clone --depth 1 https://github.com/mihaialexandruteodor/wallpaper-stash.git /tmp/wallpaper-stash
+cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/
 rm -rf /tmp/wallpaper-stash
 
 # 2️ Create the Hyprland startup script
 mkdir -p ~/.config/hypr/scripts
 cat > ~/.config/hypr/scripts/start-live-wallpaper.sh << 'EOF'
 #!/bin/bash
-sleep 2
-MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
+# wait for monitor to be ready
+for i in {1..5}; do
+  MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
+  [ -n "$MONITOR" ] && break
+  sleep 1
+done
 WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" | shuf -n1)
 mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
 EOF
