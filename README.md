@@ -66,8 +66,7 @@ mpvpaper -o "no-audio loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/t
 
 to make it work in vmware, run with no software decoding
 ```
-mpvpaper -o "no-hwdec loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/to/video.mp4
-
+mpvpaper -o "no-hwdec gpu-context=wayland loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/to/video.mp4
 ```
 ------
 
