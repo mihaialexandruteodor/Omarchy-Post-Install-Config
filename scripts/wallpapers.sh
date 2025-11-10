@@ -40,6 +40,7 @@ else
 fi
 
 # 4️⃣ Immediately run a random wallpaper in the current session in background
+sleep 3
 MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
 WALLPAPER=$(find "$USER_HOME/Documents/wallpapers/live/" -type f -name "*.mp4" | shuf -n1)
 echo "Starting random wallpaper for current session: $WALLPAPER on $MONITOR"
