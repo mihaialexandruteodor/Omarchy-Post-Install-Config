@@ -55,9 +55,8 @@ echo 'exec-once = ~/.config/hypr/scripts/start-live-wallpaper.sh' >> ~/.config/h
 MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
 WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" | shuf -n1)
 pkill -f "mpvpaper.*$MONITOR"
-mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
-
-
+nohup mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" >/dev/null 2>&1 &
+disown
 
 
 echo "Installation complete!"
