@@ -30,10 +30,7 @@ while IFS= read -r line || [ -n "$line" ]; do
 done < "$CSV_FILE"
 
 # get wallpaper files
-mkdir -p ~/Documents/wallpapers
-cd ~/Documents/wallpapers
-wget -r -np -nH --cut-dirs=4 -R "index.html*" https://github.com/mihaialexandruteodor/wallpaper-stash/raw/main/live/
-
+mkdir -p ~/Documents/wallpapers/live && git clone --depth 1 https://github.com/mihaialexandruteodor/wallpaper-stash.git /tmp/wallpaper-stash && cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/ && rm -rf /tmp/wallpaper-stash
 
 # init live wallpaper on startup - this adds to hyprland config if it doesn't exist yet
 grep -qxF "exec-once = mpvpaper -o \"no-audio loop\" \"\$(hyprctl monitors -j | jq -r '.[0].name')\" \"$HOME/Documents/wallpapers/live/moonlight-shadow-of-ryuk.3840x2160.mp4\"" ~/.config/hypr/hyprland.conf || \
