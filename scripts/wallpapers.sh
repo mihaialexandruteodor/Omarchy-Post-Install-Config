@@ -20,35 +20,45 @@ echo "Wallpapers downloaded to $USER_HOME/Documents/wallpapers/live"
 # 2️⃣ Create the Hyprland startup script
 echo "Creating Hyprland startup script..."
 mkdir -p "$USER_HOME/.config/hypr/scripts"
-cat > "$USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" << 'EOF'
+
+cat > "$USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" << EOF
 #!/bin/bash
+
 echo "Starting live wallpaper at login..."
+
 # wait for monitor to be ready
-for i in {1..10}; do
-    MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
-    if [ -n "$MONITOR" ]; then
-        echo "Monitor detected: $MONITOR"
+for i in {1..15}; do
+    MONITOR=\$(hyprctl monitors -j | jq -r '.[0].name')
+    if [ -n "\$MONITOR" ]; then
+        echo "Monitor detected: \$MONITOR"
         break
     fi
-    echo "Waiting for monitor to be ready... ($i)"
+    echo "Waiting for monitor... (\$i)"
     sleep 1
 done
 
 # pick a random wallpaper safely
-WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" -print0 | shuf -zn1 | xargs -0)
-echo "Launching wallpaper: $WALLPAPER"
-mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
+WALLPAPER=\$(find "$USER_HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" -print0 | shuf -zn1 | xargs -0)
+echo "Launching wallpaper: \$WALLPAPER"
+
+# kill previous mpvpaper instances for this monitor and start a new one
+pkill -f "mpvpaper.*\$MONITOR"
+mpvpaper -o "no-audio loop" "\$MONITOR" "\$WALLPAPER" &
 EOF
+
 chmod +x "$USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh"
+echo "Startup script created at $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh"
 
 # 3️⃣ Add it to hyprland.conf if not already there
-grep -qxF "exec = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" "$USER_HOME/.config/hypr/hyprland.conf" || \
-echo "exec = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" >> "$USER_HOME/.config/hypr/hyprland.conf"
+HYP_CONF="$USER_HOME/.config/hypr/hyprland.conf"
+grep -qxF "exec = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" "$HYP_CONF" || \
+echo "exec = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" >> "$HYP_CONF"
 echo "Startup script added to hyprland.conf"
 
-# 4️⃣ Immediately run a random wallpaper in the current session in background
+# 4️⃣ Immediately run a random wallpaper for the current session
 (
-    echo "Running a random wallpaper for current session..."
+    echo "Running a random wallpaper for the current session..."
+
     # wait until monitor is ready
     while true; do
         MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
@@ -66,5 +76,6 @@ echo "Startup script added to hyprland.conf"
     pkill -f "mpvpaper.*$MONITOR"
     nohup mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" >/dev/null 2>&1 &
     disown
+
     echo "Live wallpaper started!"
 ) &
