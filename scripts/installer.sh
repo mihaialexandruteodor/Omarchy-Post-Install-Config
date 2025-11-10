@@ -2,6 +2,9 @@
 
 echo "Starting to install desired programs..."
 
+# pacman installs first
+sudo pacman -S mpv
+
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 CSV_FILE="$SCRIPT_DIR/packages_install.csv"
 
