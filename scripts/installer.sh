@@ -29,25 +29,35 @@ while IFS= read -r line || [ -n "$line" ]; do
   done
 done < "$CSV_FILE"
 
-# get wallpaper files
-mkdir -p ~/Documents/wallpapers/live && git clone --depth 1 https://github.com/mihaialexandruteodor/wallpaper-stash.git /tmp/wallpaper-stash && cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/ && rm -rf /tmp/wallpaper-stash
+#!/bin/bash
 
+# 1️ Create wallpapers folder and download GitHub wallpapers
+mkdir -p ~/Documents/wallpapers/live && \
+git clone --depth 1 https://github.com/mihaialexandruteodor/wallpaper-stash.git /tmp/wallpaper-stash && \
+cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/ && \
+rm -rf /tmp/wallpaper-stash
+
+# 2️ Create the Hyprland startup script
 mkdir -p ~/.config/hypr/scripts && \
 cat > ~/.config/hypr/scripts/start-live-wallpaper.sh << 'EOF'
 #!/bin/bash
-# Get the first monitor name
 MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
-
-# Pick a random mp4 from the live wallpapers folder
 WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" | shuf -n1)
-
-# Start mpvpaper in the background
 mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
 EOF
-chmod +x ~/.config/hypr/scripts/start-live-wallpaper.sh && \
+chmod +x ~/.config/hypr/scripts/start-live-wallpaper.sh
+
+# 3️ Add it to hyprland.conf if not already there
 grep -qxF 'exec-once = ~/.config/hypr/scripts/start-live-wallpaper.sh' ~/.config/hypr/hyprland.conf || \
 echo 'exec-once = ~/.config/hypr/scripts/start-live-wallpaper.sh' >> ~/.config/hypr/hyprland.conf
 
+# 4️ Immediately run a random wallpaper in the current session
+MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
+WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" | shuf -n1)
+pkill -f "mpvpaper.*$MONITOR"
+mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
 
 
-echo "✅ Installation complete!"
+
+
+echo "Installation complete!"
