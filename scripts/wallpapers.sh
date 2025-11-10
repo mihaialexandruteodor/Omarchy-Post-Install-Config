@@ -7,9 +7,10 @@ cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/ && \
 rm -rf /tmp/wallpaper-stash
 
 # 2️ Create the Hyprland startup script
-mkdir -p ~/.config/hypr/scripts && \
+mkdir -p ~/.config/hypr/scripts
 cat > ~/.config/hypr/scripts/start-live-wallpaper.sh << 'EOF'
 #!/bin/bash
+sleep 2
 MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
 WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" | shuf -n1)
 mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
