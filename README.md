@@ -71,6 +71,10 @@ build() {
   meson compile -C build
 }
 ```
+then build it
+```
+makepkg -si
+```
 ------
 
 # --- Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM ---
