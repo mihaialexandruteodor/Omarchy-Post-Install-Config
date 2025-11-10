@@ -9,6 +9,7 @@ chmod +x ./scripts/*.sh
 ./scripts/uninstaller.sh
 ./scripts/remapper.sh
 ./scripts/installer_eslint.sh
-./scripts/steam.sh
+# Run Omarchy Steam installer using current user's home directory
+"$HOME/.local/share/omarchy/bin/omarchy-install-steam"
 ./scripts/themes.sh
 ./scripts/wallpapers.sh
