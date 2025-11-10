@@ -32,9 +32,22 @@ done < "$CSV_FILE"
 # get wallpaper files
 mkdir -p ~/Documents/wallpapers/live && git clone --depth 1 https://github.com/mihaialexandruteodor/wallpaper-stash.git /tmp/wallpaper-stash && cp /tmp/wallpaper-stash/live/* ~/Documents/wallpapers/live/ && rm -rf /tmp/wallpaper-stash
 
-# init live wallpaper on startup - this adds to hyprland config if it doesn't exist yet
-grep -qxF "exec-once = mpvpaper -o \"no-audio loop\" \"\$(hyprctl monitors -j | jq -r '.[0].name')\" \"$HOME/Documents/wallpapers/live/moonlight-shadow-of-ryuk.3840x2160.mp4\"" ~/.config/hypr/hyprland.conf || \
-echo "exec-once = mpvpaper -o \"no-audio loop\" \"\$(hyprctl monitors -j | jq -r '.[0].name')\" \"$HOME/Documents/wallpapers/live/moonlight-shadow-of-ryuk.3840x2160.mp4\"" >> ~/.config/hypr/hyprland.conf
+mkdir -p ~/.config/hypr/scripts && \
+cat > ~/.config/hypr/scripts/start-live-wallpaper.sh << 'EOF'
+#!/bin/bash
+# Get the first monitor name
+MONITOR=$(hyprctl monitors -j | jq -r '.[0].name')
+
+# Pick a random mp4 from the live wallpapers folder
+WALLPAPER=$(find "$HOME/Documents/wallpapers/live/" -maxdepth 1 -type f -name "*.mp4" | shuf -n1)
+
+# Start mpvpaper in the background
+mpvpaper -o "no-audio loop" "$MONITOR" "$WALLPAPER" &
+EOF
+chmod +x ~/.config/hypr/scripts/start-live-wallpaper.sh && \
+grep -qxF 'exec-once = ~/.config/hypr/scripts/start-live-wallpaper.sh' ~/.config/hypr/hyprland.conf || \
+echo 'exec-once = ~/.config/hypr/scripts/start-live-wallpaper.sh' >> ~/.config/hypr/hyprland.conf
+
 
 
 echo "✅ Installation complete!"
