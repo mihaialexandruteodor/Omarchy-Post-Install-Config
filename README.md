@@ -63,6 +63,14 @@ Open debug menu with `Leader+d`, b is to toggle breakpoint, c to launch/continue
 ```
 mpvpaper -o "no-audio loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/to/video.mp4
 ```
+
+to make it work in vmware, clone mpvpaper and edit **PKGBUILD**
+```
+build() {
+  arch-meson . build -Dnvdec=disabled -Dvaapi=disabled -Dvulkan=disabled -Dx11=disabled
+  meson compile -C build
+}
+```
 ------
 
 # --- Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM ---
