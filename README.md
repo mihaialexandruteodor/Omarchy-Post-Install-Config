@@ -40,6 +40,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] eslint
 - [x] gradle
 - [x] mpvpaper (live wallpapers)
+- [x] Steam
 
 ## Uninstalls
 - [x] Chromium
