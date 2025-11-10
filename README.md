@@ -20,13 +20,19 @@ cd /tmp && rm -rf Omarchy-Post-Install-Config
 [Also check: Omarchy Cleaner](https://github.com/maxart/omarchy-cleaner)
 
 ## Check package name
-``` pacman -Qo [program-name] ```
+``` 
+pacman -Qo [program-name]
+```
 
 ### Run just the remapper
-``` chmod +x ./scripts/remapper.sh && ./scripts/remapper.sh ```
+```
+chmod +x ./scripts/remapper.sh && ./scripts/remapper.sh
+```
 
 ## Run master script
-``` chmod +x ./master_script.sh && ./master_script.sh```
+``` 
+chmod +x ./master_script.sh && ./master_script.sh
+```
 
 ## Installs
 - [x] Brave Browser
@@ -53,6 +59,10 @@ Open debug menu with `Leader+d`, b is to toggle breakpoint, c to launch/continue
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
 
+## Change live wallpaper
+```
+mpvpaper -o "no-audio loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/to/video.mp4
+```
 ------
 
 # --- Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM ---
