@@ -42,8 +42,8 @@ EOF
 chmod +x "$USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh"
 
 # 3️⃣ Add it to hyprland.conf if not already there
-grep -qxF "exec-once = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" "$USER_HOME/.config/hypr/hyprland.conf" || \
-echo "exec-once = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" >> "$USER_HOME/.config/hypr/hyprland.conf"
+grep -qxF "exec = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" "$USER_HOME/.config/hypr/hyprland.conf" || \
+echo "exec = $USER_HOME/.config/hypr/scripts/start-live-wallpaper.sh" >> "$USER_HOME/.config/hypr/hyprland.conf"
 echo "Startup script added to hyprland.conf"
 
 # 4️⃣ Immediately run a random wallpaper in the current session in background
