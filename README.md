@@ -64,16 +64,10 @@ Open debug menu with `Leader+d`, b is to toggle breakpoint, c to launch/continue
 mpvpaper -o "no-audio loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/to/video.mp4
 ```
 
-to make it work in vmware, clone mpvpaper and edit **PKGBUILD**
+to make it work in vmware, run with no software decoding
 ```
-build() {
-  arch-meson . build -Dnvdec=disabled -Dvaapi=disabled -Dvulkan=disabled -Dx11=disabled
-  meson compile -C build
-}
-```
-then build it
-```
-makepkg -si
+mpvpaper -o "no-hwdec loop" "$(hyprctl monitors -j | jq -r '.[0].name')" /path/to/video.mp4
+
 ```
 ------
 
