@@ -33,6 +33,7 @@ cd /tmp && rm -rf Omarchy-Post-Install-Config
 - [x] neofetch
 - [x] eslint
 - [x] gradle
+- [x] mpvpaper (live wallpapers)
 
 ## Uninstalls
 - [x] Chromium
