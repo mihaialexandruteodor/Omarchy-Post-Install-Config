@@ -1,5 +1,28 @@
 # Omarchy post install config
 
+
+## Table of Contents
+- [Run in one command (also installs wget)](#run-in-one-command-also-installs-wget)
+- [Links](#links)
+- [Check package name](#check-package-name)
+  - [Run just the remapper](#run-just-the-remapper)
+  - [Run master script](#run-master-script)
+- [Installs](#installs)
+- [Uninstalls](#uninstalls)
+- [Debugger](#debugger)
+- [Mount NTFS drive](#mount-ntfs-drive)
+- [Themes](#themes)
+- [Change live wallpaper](#change-live-wallpaper)
+- [Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM](#use-vmware-workstation-winlinux-or-fusion-mac-to-test-the-script-on-an-omarchy-vm)
+- [Making an Omarchy bootable USB on Mac](#making-an-omarchy-bootable-usb-on-mac)
+  - [1. List disks and identify your USB](#1-list-disks-and-identify-your-usb)
+  - [2. Unmount the USB (replace diskX with your USB disk)](#2-unmount-the-usb-replace-diskx-with-your-usb-disk)
+  - [3. Optional: Format the USB as FAT32 with GPT](#3-optional-format-the-usb-as-fat32-with-gpt)
+  - [4. Write the ISO to the USB (replace /path/to/your.iso with your ISO file)](#4-write-the-iso-to-the-usb-replace-pathtoyouriso-with-your-iso-file)
+  - [5. Fix the MSI EFI fallback (if needed)](#5-fix-the-msi-efi-fallback-if-needed)
+  - [6. Eject the USB safely](#6-eject-the-usb-safely)
+  - [7. Optional: Verify the ISO checksum](#7-optional-verify-the-iso-checksum)
+
 ## Run in one command (also installs wget)
 ```
 sudo pacman -Syu --noconfirm git wget && \
