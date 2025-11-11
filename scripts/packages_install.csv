@@ -1,4 +1,8 @@
 brave-bin,
 neofetch,
 ntfs-3g,
-gradle
+gradle,
+vulkan-radeon,
+lib32-vulkan-radeon,
+gamemode,
+lib32-gamemode
