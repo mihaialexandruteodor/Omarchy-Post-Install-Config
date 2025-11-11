@@ -157,5 +157,5 @@ Done! Know it should work.
 ## Making an Omarchy Bootable USB on Mac
 
 ### Use UNetbootin to flash the USB
-
+[UNetbootin](https://unetbootin.github.io/)
 
