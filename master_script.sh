@@ -12,4 +12,4 @@ chmod +x ./scripts/*.sh
 # Run Omarchy Steam installer using current user's home directory
 "$HOME/.local/share/omarchy/bin/omarchy-install-steam"
 ./scripts/themes.sh
-./scripts/wallpapers.sh
+#./scripts/wallpapers.sh
