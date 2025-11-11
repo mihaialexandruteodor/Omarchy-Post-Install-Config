@@ -57,6 +57,35 @@ Press `x` on lines ***Plugins/dap.core*** and ***Languages/lang.java***
 You need a pom.xml, gradle.build or .git to debug
 Open debug menu with `Leader+d`, b is to toggle breakpoint, c to launch/continue, but you also have a debug CLI!
 
+## Mount NTFS drive
+1. **Identify the drive**
+   ```bash
+   lsblk
+   ```
+   Find your media SSD (for example, `/dev/sdb1`).
+
+2. **Create a mount point**
+   ```bash
+   sudo mkdir /mnt/media
+   ```
+
+3. **Mount the drive**
+   ```bash
+   sudo mount -t ntfs-3g /dev/sdb1 /mnt/media
+   ```
+   (This uses the FUSE-based NTFS driver.)
+
+4. **Optional: Make it permanent**
+   Add a line to `/etc/fstab`:
+   ```
+   /dev/sdb1   /mnt/media   ntfs-3g   defaults,uid=1000,gid=1000   0   0
+   ```
+   (Adjust `uid` and `gid` to match your user if needed.)
+
+5. **Unmount when done**
+   ```bash
+   sudo umount /mnt/media
+   ```
 
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
