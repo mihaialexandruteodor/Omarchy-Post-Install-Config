@@ -14,7 +14,6 @@
 - [Themes](#themes)
 - [Change live wallpaper](#change-live-wallpaper)
 - [Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM](#use-vmware-workstation-winlinux-or-fusion-mac-to-test-the-script-on-an-omarchy-vm)
-- [Making an Omarchy Bootable USB with Ventroy](#making-an-omarchy-bootable-usb-with-ventroy)
 
 ## Run in one command (also installs wget)
 ```
@@ -154,17 +153,5 @@ Reboot system
 
 Done! Know it should work.
 ```
-## Making an Omarchy Bootable USB with Ventroy
 
-### 1. Download Ventoy for macOS (also Linux and Win) from https://www.ventoy.net/en/download.html
-### 2. Extract and install Ventoy to your USB (replace diskX):
-```
-sudo ./Ventoy2Disk.sh -i /dev/diskX
-```
-### 3. Copy your ISO to the USB (just copy it as a file)
-```
-cp /path/to/omarchy.iso /Volumes/Ventoy/
-```
-### 4. Boot MSI -> select the ISO from Ventoy menu
-
-
+Note: on MSI motherboards you might need to [put the EFI in another location](https://wiki.archlinux.org/title/GRUB/EFI_examples#MSI)
