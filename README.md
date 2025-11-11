@@ -16,12 +16,13 @@
 - [Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM](#use-vmware-workstation-winlinux-or-fusion-mac-to-test-the-script-on-an-omarchy-vm)
 - [Making an Omarchy bootable USB on Mac](#making-an-omarchy-bootable-usb-on-mac)
   - [1. List disks and identify your USB](#1-list-disks-and-identify-your-usb)
-  - [2. Unmount the USB (replace diskX with your USB disk)](#2-unmount-the-usb-replace-diskx-with-your-usb-disk)
-  - [3. Optional: Format the USB as FAT32 with GPT](#3-optional-format-the-usb-as-fat32-with-gpt)
-  - [4. Write the ISO to the USB (replace /path/to/your.iso with your ISO file)](#4-write-the-iso-to-the-usb-replace-pathtoyouriso-with-your-iso-file)
-  - [5. Fix the MSI EFI fallback (if needed)](#5-fix-the-msi-efi-fallback-if-needed)
-  - [6. Eject the USB safely](#6-eject-the-usb-safely)
-  - [7. Optional: Verify the ISO checksum](#7-optional-verify-the-iso-checksum)
+  - [2. Unmount all USB partitions (replace diskX with your USB disk)](#2-unmount-all-usb-partitions-replace-diskx-with-your-usb-disk)
+  - [3. Partition the USB as GPT with FAT32](#3-partition-the-usb-as-gpt-with-fat32)
+  - [4. Write the ISO to the USB (replace /path/to/your.iso)](#4-write-the-iso-to-the-usb-replace-pathtoyouriso)
+  - [5. Eject and remount the USB](#5-eject-and-remount-the-usb)
+  - [6. Check EFI folder and create MSI fallback if needed](#6-check-efi-folder-and-create-msi-fallback-if-needed)
+  - [7. Eject the USB safely](#7-eject-the-usb-safely)
+  - [8. Optional: Verify the ISO checksum](#8-optional-verify-the-iso-checksum)
 
 ## Run in one command (also installs wget)
 ```
@@ -161,40 +162,74 @@ Reboot system
 
 Done! Know it should work.
 ```
-## Making an Omarchy bootable USB on Mac
+## Making an Omarchy Bootable USB on Mac (with GPT Partitioning)
 
-# 1. List disks and identify your USB
-```
+### 1. List disks and identify your USB
+```bash
 diskutil list
 ```
 
-# 2. Unmount the USB (replace diskX with your USB disk)
-```
-diskutil unmountDisk /dev/diskX
-```
+---
 
-# 3. Optional: Format the USB as FAT32 with GPT
+### 2. Unmount all USB partitions (replace diskX with your USB disk)
+```bash
+diskutil unmountDisk force /dev/diskX
 ```
-diskutil eraseDisk FAT32 ARCHUSB GPT /dev/diskX
-```
+> macOS must not have any partition mounted for `dd` to work.
 
-# 4. Write the ISO to the USB (replace /path/to/your.iso with your ISO file)
+---
+
+### 3. Partition the USB as GPT with FAT32
+```bash
+diskutil partitionDisk /dev/diskX GPT FAT32 ARCHUSB 100%
 ```
+- Creates a clean GPT table with one FAT32 partition spanning the whole disk.  
+- This ensures UEFI compatibility.
+
+---
+
+### 4. Write the ISO to the USB (replace /path/to/your.iso)
+```bash
 sudo dd if=/path/to/your.iso of=/dev/rdiskX bs=1m status=progress
 ```
+- Use `/dev/rdiskX` for raw disk access (faster).  
+- Wait until it completes; it may take several minutes.
 
-# 5. Fix the MSI EFI fallback (if needed)
+---
+
+### 5. Eject and remount the USB
+```bash
+diskutil eject /dev/diskX
 ```
+- Reinsert the USB; macOS should mount the ISO contents automatically.
+
+---
+
+### 6. Check EFI folder and create MSI fallback if needed
+```bash
+ls /Volumes/ARCHUSB/EFI
+```
+- If `/EFI/BOOT/BOOTX64.EFI` **does not exist**, create it:
+
+```bash
 mkdir -p /Volumes/ARCHUSB/EFI/BOOT
-cp /Volumes/ARCHUSB/EFI/arch/grubx64.efi /Volumes/ARCHUSB/EFI/BOOT/BOOTX64.EFI
+cp /Volumes/ARCHUSB/EFI/<folder>/<file>.efi /Volumes/ARCHUSB/EFI/BOOT/BOOTX64.EFI
 ```
+- Replace `<folder>` and `<file>` with the actual `.efi` file found inside the EFI directory.  
+- This ensures MSI motherboards can find the UEFI bootloader.
 
-# 6. Eject the USB safely
-```
+---
+
+### 7. Eject the USB safely
+```bash
 diskutil eject /dev/diskX
 ```
 
-# 7. Optional: Verify the ISO checksum
-```
+---
+
+### 8. Optional: Verify ISO checksum
+```bash
 shasum -a 256 /path/to/your.iso
 ```
+- Useful to confirm the ISO downloaded correctly.
+
