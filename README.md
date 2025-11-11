@@ -160,12 +160,18 @@ diskutil eraseDisk FAT32 ARCHUSB GPT /dev/diskX
 sudo dd if=/path/to/your.iso of=/dev/rdiskX bs=1m status=progress
 ```
 
-# 5. Eject the USB safely
+# 5. Fix the MSI EFI fallback (if needed)
+```
+mkdir -p /Volumes/ARCHUSB/EFI/BOOT
+cp /Volumes/ARCHUSB/EFI/arch/grubx64.efi /Volumes/ARCHUSB/EFI/BOOT/BOOTX64.EFI
+```
+
+# 6. Eject the USB safely
 ```
 diskutil eject /dev/diskX
 ```
 
-# 6. Optional: Verify the ISO checksum
+# 7. Optional: Verify the ISO checksum
 ```
 shasum -a 256 /path/to/your.iso
 ```
