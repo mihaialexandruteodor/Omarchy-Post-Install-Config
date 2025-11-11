@@ -37,6 +37,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 ## Installs
 - [x] Brave Browser
 - [x] neofetch
+- [x] ntfs-3g
 - [x] eslint
 - [x] gradle
 - [x] mpvpaper (live wallpapers)
