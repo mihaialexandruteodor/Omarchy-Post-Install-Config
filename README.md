@@ -14,7 +14,7 @@
 - [Themes](#themes)
 - [Change live wallpaper](#change-live-wallpaper)
 - [Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM](#use-vmware-workstation-winlinux-or-fusion-mac-to-test-the-script-on-an-omarchy-vm)
-- [Making an Omarchy bootable USB on Mac](#making-an-omarchy-bootable-usb-on-mac)
+- [Making an Omarchy Bootable USB on Mac (with GPT Partitioning)](#making-an-omarchy-bootable-usb-on-mac-with-gpt-partitioning)
   - [1. List disks and identify your USB](#1-list-disks-and-identify-your-usb)
   - [2. Unmount all USB partitions (replace diskX with your USB disk)](#2-unmount-all-usb-partitions-replace-diskx-with-your-usb-disk)
   - [3. Partition the USB as GPT with FAT32](#3-partition-the-usb-as-gpt-with-fat32)
