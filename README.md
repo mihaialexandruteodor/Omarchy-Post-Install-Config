@@ -138,3 +138,34 @@ Reboot system
 
 Done! Know it should work.
 ```
+## Making an Omarchy bootable USB on Mac
+
+# 1. List disks and identify your USB
+```
+diskutil list
+```
+
+# 2. Unmount the USB (replace diskX with your USB disk)
+```
+diskutil unmountDisk /dev/diskX
+```
+
+# 3. Optional: Format the USB as FAT32 with GPT
+```
+diskutil eraseDisk FAT32 ARCHUSB GPT /dev/diskX
+```
+
+# 4. Write the ISO to the USB (replace /path/to/your.iso with your ISO file)
+```
+sudo dd if=/path/to/your.iso of=/dev/rdiskX bs=1m status=progress
+```
+
+# 5. Eject the USB safely
+```
+diskutil eject /dev/diskX
+```
+
+# 6. Optional: Verify the ISO checksum
+```
+shasum -a 256 /path/to/your.iso
+```
