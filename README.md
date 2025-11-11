@@ -55,7 +55,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] ntfs-3g
 - [x] eslint
 - [x] gradle
-- [x] mpvpaper (live wallpapers)
+- [] mpvpaper (live wallpapers)
 - [x] Steam
 
 ## Uninstalls
