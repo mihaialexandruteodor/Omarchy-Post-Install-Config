@@ -29,4 +29,16 @@ protonrun() {
     "$HOME/.steam/steam/steamapps/common/Proton - Experimental/proton" run "$exe"
 }
 
-alias deusex='protonrun "/home/frosty/Documents/steamgames/steamapps/common/Deus Ex/System/deusex.exe"'
+protonrun_deusex() {
+    local exe="/home/frosty/Documents/steamgames/steamapps/common/Deus Ex/System/deusex.exe"
+    local name=$(basename "$exe" .exe)
+    local prefix="$HOME/.proton-prefixes/$name"
+    mkdir -p "$prefix"
+
+    # Set X11 for SDL only for Deus Ex
+    SDL_VIDEODRIVER=x11 \
+    STEAM_COMPAT_DATA_PATH="$prefix" \
+    STEAM_COMPAT_CLIENT_INSTALL_PATH="$HOME/.steam/steam" \
+    "$HOME/.steam/steam/steamapps/common/Proton - Experimental/proton" run "$exe"
+}
+
