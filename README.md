@@ -58,6 +58,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] gradle
 - [ ] mpvpaper (live wallpapers)
 - [x] Steam
+- [x] AMD game drivers
 
 ## Uninstalls
 - [x] Chromium
