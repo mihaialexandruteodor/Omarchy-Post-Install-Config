@@ -14,6 +14,7 @@
 - [Themes](#themes)
 - [Change live wallpaper](#change-live-wallpaper)
 - [Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM](#use-vmware-workstation-winlinux-or-fusion-mac-to-test-the-script-on-an-omarchy-vm)
+- [Bootable USB](#bootable-usb)
 
 ## Run in one command (also installs wget)
 ```
@@ -153,5 +154,7 @@ Reboot system
 
 Done! Know it should work.
 ```
+# Bootable USB
+Only way to boot this ISO was to use [Ventoy](https://www.ventoy.net/en/download.html), available on Win, Mac, Linux. I disabled secure boot in MSI Click Bios 5 advanced settings in the lower right column (fast boot was ok to keep)
 
-Note: on MSI motherboards you might need to [put the EFI in another location](https://wiki.archlinux.org/title/GRUB/EFI_examples#MSI)
+See also: on MSI motherboards you might need to [put the EFI in another location](https://wiki.archlinux.org/title/GRUB/EFI_examples#MSI)
