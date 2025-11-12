@@ -54,7 +54,8 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Brave Browser
 - [x] Discord (app)
 - [x] neofetch
-- [x] clipse
+- [x] clipse (clipboard)
+- [x] Ashell status bar
 - [x] ntfs-3g
 - [x] eslint
 - [x] gradle
