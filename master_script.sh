@@ -18,4 +18,7 @@ mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 ./scripts/vmware-install.sh
 #./scripts/wallpapers.sh
 
+# add config for clipboard
+echo -e "exec-once = wl-paste --type text --watch cliphist store # Stores only text data\nexec-once = wl-paste --type image --watch cliphist store # Stores only image data" >> ~/.config/hypr/hyprland.conf
+
 curl -fsSL https://raw.githubusercontent.com/maxart/omarchy-cleaner/main/omarchy-cleaner.sh | bash
