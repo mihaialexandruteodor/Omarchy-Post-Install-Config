@@ -59,6 +59,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [ ] mpvpaper (live wallpapers)
 - [x] Steam
 - [x] AMD game drivers
+- [x] VMWare
 
 ## Uninstalls
 - [x] Chromium
