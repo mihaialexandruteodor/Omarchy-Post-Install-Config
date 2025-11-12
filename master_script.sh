@@ -17,7 +17,7 @@ rm -rf ~/.config/waybar
 
 # Run Omarchy Steam installer using current user's home directory
 "$HOME/.local/share/omarchy/bin/omarchy-install-steam"
-./scripts/themes.sh
+#./scripts/themes.sh
 ./scripts/vmware-install.sh
 #./scripts/wallpapers.sh
 ./scripts/echo-into-configs.sh
