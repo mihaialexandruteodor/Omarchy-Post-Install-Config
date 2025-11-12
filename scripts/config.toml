@@ -35,24 +35,29 @@ bluetooth_more_cmd = "blueberry"
 
 scale_factor = 1.5
 
-success_color = "#a6e3a1"
-text_color = "#cdd6f4"
+success_color = "#8bd5a3"          # soft jade green
+text_color = "#d7fbe8"             # pale jade-white
 
-workspace_colors = [ "#fab387", "#b4befe", "#cba6f7" ]
+workspace_colors = [ 
+  "#8bd5a3",  # jade green
+  "#a6e3b1",  # light mint jade
+  "#5bb98c"   # deeper moss green
+]
 
 [appearance.primary_color]
-base = "#fab387"
-text = "#1e1e2e"
+base = "#5bb98c"                   # Osaka jade core tone
+text = "#0b1c13"                   # very dark green-black
 
 [appearance.danger_color]
-base = "#f38ba8"
-weak = "#f9e2af"
+base = "#e78284"                   # muted red for contrast
+weak = "#f2b6a0"                   # warm soft red
 
 [appearance.background_color]
-base = "#1e1e2e"
-weak = "#313244"
-strong = "#45475a"
+base = "#0b1c13"                   # near-black with a green tint
+weak = "#142820"                   # dark moss green
+strong = "#1f3a2f"                 # deeper forest green
 
 [appearance.secondary_color]
-base = "#11111b"
-strong = "#1b1b25"
+base = "#10271e"                   # muted forest base
+strong = "#19362c"                 # strong green-gray contrast
+
