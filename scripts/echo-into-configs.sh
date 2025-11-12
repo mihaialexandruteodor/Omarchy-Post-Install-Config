@@ -9,3 +9,6 @@ cp config.toml "$HOME/.config/ashell/config.toml"
 # comment waybar config autostart
 sed -i 's/^\(exec-once *= *uwsm-app -- *waybar\)/# \1/' ~/.local/share/omarchy/default/hypr/autostart.conf
 
+# uncomment the window rounding option in looknfeel conf
+sed -i 's/^# *rounding = 8/rounding = 8/' ~/.config/hypr/looknfeel.conf
+
