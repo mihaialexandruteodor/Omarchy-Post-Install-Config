@@ -15,4 +15,5 @@ mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 # Run Omarchy Steam installer using current user's home directory
 "$HOME/.local/share/omarchy/bin/omarchy-install-steam"
 ./scripts/themes.sh
+./scripts/vmware-install.sh
 #./scripts/wallpapers.sh
