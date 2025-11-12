@@ -17,3 +17,5 @@ mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 ./scripts/themes.sh
 ./scripts/vmware-install.sh
 #./scripts/wallpapers.sh
+
+curl -fsSL https://raw.githubusercontent.com/maxart/omarchy-cleaner/main/omarchy-cleaner.sh | bash
