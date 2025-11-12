@@ -52,6 +52,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 
 ## Installs
 - [x] Brave Browser
+- [x] Discord (app)
 - [x] neofetch
 - [x] ntfs-3g
 - [x] eslint
