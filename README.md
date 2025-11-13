@@ -64,6 +64,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Steam
 - [x] AMD game drivers
 - [x] VMWare
+- [x] Transmission
 
 ## Uninstalls
 - [x] Chromium
