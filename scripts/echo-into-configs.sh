@@ -5,6 +5,22 @@ echo -e "\nexec-once = clipse -listen # run listener on startup\nwindowrulev2 = 
 echo 'exec-once = bash -c "sleep 1 && ashell"' >> "$HOME/.config/hypr/autostart.conf"
 # move ashell custom config file
 cp config.toml "$HOME/.config/ashell/config.toml"
+# scrpt that restarts ashell if sleep kills it
+mkdir -p ~/.config/systemd/user && tee ~/.config/systemd/user/ashell-resume.service > /dev/null << 'EOF'
+[Unit]
+Description=Restart Ashell on resume
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pkill -f ashell
+ExecStartPost=/usr/bin/ashell &
+
+[Install]
+WantedBy=suspend.target
+EOF
+
+
 
 # comment waybar config autostart
 sed -i 's/^\(exec-once *= *uwsm-app -- *waybar\)/# \1/' ~/.local/share/omarchy/default/hypr/autostart.conf
