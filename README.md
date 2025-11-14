@@ -1,6 +1,6 @@
 # Omarchy post install config
 
-<p align=center><img src="example.png" /></p>
+<p align=center><img src="example1.png" /></p>
 
 ## Table of Contents
 - [Run in one command (also installs wget)](#run-in-one-command-also-installs-wget)
