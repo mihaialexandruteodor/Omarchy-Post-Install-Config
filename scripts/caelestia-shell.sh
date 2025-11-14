@@ -36,7 +36,7 @@ sudo gtk-update-icon-cache /usr/share/icons/hicolor
 grep -qxF 'windowrulev2 = opacity 1.0 override,class:^(brave-browser)$' ~/.config/hypr/hyprland.conf || echo 'windowrulev2 = opacity 0.8 override,class:^(Brave)$' >> ~/.config/hypr/hyprland.conf
 
 # Check and add Plex transparency rule
-grep -qxF 'windowrulev2 = opacity 1.0 override,class:^(Plex)$' ~/.config/hypr/hyprland.conf || echo 'windowrulev2 = opacity 1.0 override,class:^(Plex)$' >> ~/.config/hypr/hyprland.conf
+grep -qxF 'windowrulev2 = opacity 1.0 override,class:^(tv.plex.Plex)$' ~/.config/hypr/hyprland.conf || echo 'windowrulev2 = opacity 1.0 override,class:^(Plex)$' >> ~/.config/hypr/hyprland.conf
 
 
 # scheme
