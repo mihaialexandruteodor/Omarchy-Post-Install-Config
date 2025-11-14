@@ -15,6 +15,7 @@
 - [Uninstalls](#uninstalls)
 - [Debugger](#debugger)
 - [Mount NTFS drive](#mount-ntfs-drive)
+- [Troubleshoot](#troubleshoot)
 - [Themes](#themes)
 - [Change live wallpaper](#change-live-wallpaper)
 - [Use VMWare Workstation (Win/Linux) or Fusion (Mac) to test the script on an Omarchy VM](#use-vmware-workstation-winlinux-or-fusion-mac-to-test-the-script-on-an-omarchy-vm)
@@ -128,6 +129,9 @@ Open debug menu with `Leader+d`, b is to toggle breakpoint, c to launch/continue
    ```bash
    sudo umount /mnt/media
    ```
+
+## Troubleshoot
+ - Plex takes too long to load? Just switch the desktop  back and forth once without closing the app.
 
 ## Themes
 - [x] [Omarchy RetroPC Theme](https://github.com/rondilley/omarchy-retropc-theme)
