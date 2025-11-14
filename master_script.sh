@@ -8,6 +8,8 @@ chmod +x ./scripts/*.sh
 # overwrite alacritty config
 mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 
+sudo pacman -S perl-libwww
+
 ./scripts/installer.sh
 ./scripts/plex-desktop.sh
 ./scripts/uninstaller.sh
