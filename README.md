@@ -70,6 +70,12 @@ chmod +x ./master_script.sh && ./master_script.sh
 ## Uninstalls
 - [x] Chromium
 
+## Caelestia Shell
+### set wallpaper
+```
+caelestia wallpaper -f <path/to/file>
+```
+
 ## Debugger
 <img src="./debug_java.png" width="75%"/>
 Debugging works out of the box in Omarchy LazyVim, luckily. Yes, even Java!
