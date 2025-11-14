@@ -8,5 +8,8 @@ echo 'exec-once = bash -c "caelestia scheme -n dynamic"' >> "$HOME/.config/hypr/
 mkdir $HOME/.config/caelestia
 cp shell.json "$HOME/.config/caelestia/shell.json"
 
+# key bindings
+cp keybinds.conf "$HOME/.config/hypr/keybinds.conf"
+
 # scheme
 caelestia scheme set -n dynamic
