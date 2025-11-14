@@ -2,6 +2,8 @@
 
 <p align=center><img src="example.png" /></p>
 <p align=center><img src="example2.png" /></p>
+<p align=center><img src="example3.png" /></p>
+<p align=center><img src="example4.png" /></p>
 
 ## Table of Contents
 - [Run in one command (also installs wget)](#run-in-one-command-also-installs-wget)
