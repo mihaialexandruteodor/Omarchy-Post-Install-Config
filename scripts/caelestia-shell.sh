@@ -19,6 +19,8 @@ sed -i '/monitor = , preferred, auto, 1/c\source = ~/.config/hypr/monitors.conf'
 
 # set Alacritty as terminal, Super + T
 sed -i 's/^\$terminal = foot$/\$terminal = alacritty/' ~/.config/hypr/variables.conf
+# set Brave as broswer, Super + W
+sed -i 's/^\$browser = zen-browser$/\$browser = brave/' ~/.config/hypr/variables.conf
 
 # add tab manager
 git clone https://github.com/mihaialexandruteodor/quickshell-overview.git ~/.config/quickshell/overview
