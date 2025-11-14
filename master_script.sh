@@ -9,6 +9,7 @@ chmod +x ./scripts/*.sh
 mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 
 ./scripts/installer.sh
+./scripts/plex-desktop.sh
 ./scripts/uninstaller.sh
 ./scripts/remapper.sh
 ./scripts/installer_eslint.sh
