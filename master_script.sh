@@ -30,3 +30,7 @@ omarchy-theme-set everforest
 
 # omarchy cleaner
 curl -fsSL https://raw.githubusercontent.com/maxart/omarchy-cleaner/main/omarchy-cleaner.sh | bash
+
+sudo pacman -Rns fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-qt
+
+reboot
