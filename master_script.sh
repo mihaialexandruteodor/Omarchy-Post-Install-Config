@@ -15,6 +15,8 @@ mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 
 rm -rf ~/.config/waybar
 
+./scripts/caelestia-shell.sh
+
 # Run Omarchy Steam installer using current user's home directory
 "$HOME/.local/share/omarchy/bin/omarchy-install-steam"
 #./scripts/themes.sh
