@@ -5,23 +5,9 @@ echo -e "\nexec-once = clipse -listen # run listener on startup\nwindowrulev2 = 
 echo 'exec-once = bash -c "sleep 1 && ashell"' >> "$HOME/.config/hypr/autostart.conf"
 # move ashell custom config file
 cp config.toml "$HOME/.config/ashell/config.toml"
-# scrpt that restarts ashell if sleep kills it
-mkdir -p ~/.config/systemd/user && tee ~/.config/systemd/user/ashell.service > /dev/null << 'EOF'
-[Unit]
-Description=Ashell persistent user session
-
-[Service]
-ExecStart=/usr/bin/ashell
-Restart=always
-RestartSec=2
-# Ensures systemd also stops any orphan child processes
-KillMode=process
-
-[Install]
-WantedBy=default.target
-EOF
-
-
+# scrpt that restarts ashell if something kills it
+mkdir -p ~/.config/systemd/user 
+cp ashell.service "$HOME/.config/systemd/user/ashell.service"
 
 
 # comment waybar config autostart
