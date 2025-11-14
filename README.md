@@ -73,14 +73,11 @@ chmod +x ./master_script.sh && ./master_script.sh
 
 ## Caelestia Shell
 ### set wallpaper
-```
-caelestia wallpaper -f <path/to/file>
-```
+Put some wallpapers in /Pictures/Wallpapers
 
-or put the wallpaper in the hypr theme folder
-```
-.config/omarchy/themes
-```
+Press super key and `>`
+
+type wallpaper
 
 and press `Super + CTRL + Space` to cycle through them
 
