@@ -28,7 +28,9 @@ echo 'bind = Super, TAB, exec, qs ipc -c overview call overview toggle' >> ~/.co
 echo 'exec-once = qs -c overview' >> ~/.config/hypr/hyprland.conf
 
 # icons fix
-
+sudo pacman -S papirus-icon-theme
+gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+sudo gtk-update-icon-cache /usr/share/icons/hicolor
 
 # scheme
 caelestia scheme set -n dynamic
