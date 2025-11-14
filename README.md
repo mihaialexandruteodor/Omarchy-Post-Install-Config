@@ -56,7 +56,8 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Discord (app)
 - [x] neofetch
 - [x] clipse (clipboard)
-- [x] Ashell status bar
+- [ ] Ashell status bar
+- [x] Caelestia shell
 - [x] ntfs-3g
 - [x] eslint
 - [x] gradle
