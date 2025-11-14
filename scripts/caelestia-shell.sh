@@ -27,6 +27,24 @@ git clone https://github.com/mihaialexandruteodor/quickshell-overview.git ~/.con
 echo 'bind = Super, TAB, exec, qs ipc -c overview call overview toggle' >> ~/.config/hypr/hyprland.conf
 echo 'exec-once = qs -c overview' >> ~/.config/hypr/hyprland.conf
 
+# tray icon fix
+
+sudo loginctl enable-linger "$USER" && \
+mkdir -p ~/.config/systemd/user && \
+cat << 'EOF' > ~/.config/systemd/user/environment.service
+[Unit]
+Description=Import user environment variables
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl --user import-environment
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+EOF
+systemctl --user enable --now environment.service
+
 
 # scheme
 caelestia scheme set -n dynamic
