@@ -33,7 +33,7 @@
     },
     "general": {
         "apps": {
-            "terminal": ["foot"],
+            "terminal": ["alacritty"],
             "audio": ["pavucontrol"],
             "playback": ["mpv"],
             "explorer": ["thunar"]
