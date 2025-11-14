@@ -14,5 +14,8 @@ git clone https://github.com/caelestia-dots/caelestia.git ~/.local/share/caelest
 # monitors conf
 cp monitors.conf "$HOME/.config/hypr/monitors.conf"
 
+#enable monitor config
+sed -i '/monitor = , preferred, auto, 1/c\source = ~/.config/hypr/monitors.conf' ~/.config/hypr/hyprland.conf
+
 # scheme
 caelestia scheme set -n dynamic
