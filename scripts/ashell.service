@@ -1,0 +1,12 @@
+[Unit]
+Description=Ashell persistent user session
+
+[Service]
+ExecStart=/usr/bin/ashell
+Restart=always
+RestartSec=2
+# Ensures systemd also stops any orphan child processes
+KillMode=process
+
+[Install]
+WantedBy=default.target
