@@ -21,7 +21,7 @@ rm -rf ~/.config/waybar
 "$HOME/.local/share/omarchy/bin/omarchy-install-steam"
 #./scripts/themes.sh
 
-omarchy-theme-set osaka-jade
+omarchy-theme-set everforest
 
 ./scripts/vmware-install.sh
 #./scripts/wallpapers.sh
