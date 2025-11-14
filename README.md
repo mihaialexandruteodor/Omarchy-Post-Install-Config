@@ -65,6 +65,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] gradle
 - [ ] mpvpaper (live wallpapers)
 - [x] Steam
+- [x] Thunar
 - [x] AMD game drivers
 - [x] VMWare
 - [x] Transmission
