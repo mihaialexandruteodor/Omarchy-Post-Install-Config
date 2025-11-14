@@ -11,5 +11,8 @@ cp shell.json "$HOME/.config/caelestia/shell.json"
 # key bindings
 cp keybinds.conf "$HOME/.config/hypr/keybinds.conf"
 
+# install the dots
+git clone https://github.com/caelestia-dots/caelestia.git ~/.local/share/caelestia && ~/.local/share/caelestia/install.fish 1
+
 # scheme
 caelestia scheme set -n dynamic
