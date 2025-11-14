@@ -86,7 +86,6 @@ type wallpaper
 and press `Super + CTRL + Space` to cycle through them
 
 ## Debugger
-<img src="./debug_java.png" width="75%"/>
 Debugging works out of the box in Omarchy LazyVim, luckily. Yes, even Java!
 
 Open LazyVim with `Leader+Shift+n` or `nvim` in terminal
