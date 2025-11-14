@@ -68,6 +68,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [ ] mpvpaper (live wallpapers)
 - [x] Steam
 - [x] Thunar
+- [x] Plex desktop
 - [x] AMD game drivers
 - [x] VMWare
 - [x] Transmission
