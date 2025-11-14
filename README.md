@@ -75,6 +75,8 @@ chmod +x ./master_script.sh && ./master_script.sh
 ## Uninstalls
 - [x] Chromium
 - [x] 1Password
+- [x] Signal
+- [x] Waybar
 
 ## Caelestia Shell
 ### set wallpaper
