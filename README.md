@@ -59,6 +59,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [ ] Ashell status bar
 - [x] Caelestia shell
 - [x] ntfs-3g
+- [x] fish-shell
 - [x] eslint
 - [x] gradle
 - [ ] mpvpaper (live wallpapers)
