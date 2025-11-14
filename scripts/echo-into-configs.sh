@@ -6,19 +6,21 @@ echo 'exec-once = bash -c "sleep 1 && ashell"' >> "$HOME/.config/hypr/autostart.
 # move ashell custom config file
 cp config.toml "$HOME/.config/ashell/config.toml"
 # scrpt that restarts ashell if sleep kills it
-mkdir -p ~/.config/systemd/user && tee ~/.config/systemd/user/ashell-resume.service > /dev/null << 'EOF'
+mkdir -p ~/.config/systemd/user && tee ~/.config/systemd/user/ashell.service > /dev/null << 'EOF'
 [Unit]
-Description=Restart Ashell on resume
-After=suspend.target
+Description=Ashell persistent user session
 
 [Service]
-Type=oneshot
-ExecStart=/usr/bin/pkill -f ashell
-ExecStartPost=/usr/bin/ashell &
+ExecStart=/usr/bin/ashell
+Restart=always
+RestartSec=2
+# Ensures systemd also stops any orphan child processes
+KillMode=process
 
 [Install]
-WantedBy=suspend.target
+WantedBy=default.target
 EOF
+
 
 
 
