@@ -76,6 +76,13 @@ chmod +x ./master_script.sh && ./master_script.sh
 caelestia wallpaper -f <path/to/file>
 ```
 
+or put the wallpaper in the hypr theme folder
+```
+.config/omarchy/themes
+```
+
+and press `Super + CTRL + Space` to cycle through them
+
 ## Debugger
 <img src="./debug_java.png" width="75%"/>
 Debugging works out of the box in Omarchy LazyVim, luckily. Yes, even Java!
