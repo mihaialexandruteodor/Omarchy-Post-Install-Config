@@ -17,5 +17,8 @@ cp monitors.conf "$HOME/.config/hypr/monitors.conf"
 #enable monitor config
 sed -i '/monitor = , preferred, auto, 1/c\source = ~/.config/hypr/monitors.conf' ~/.config/hypr/hyprland.conf
 
+# set Alacritty as terminal, Super + T
+sed -i 's/^\$terminal = foot$/\$terminal = alacritty/' ~/.config/hypr/variables.conf
+
 # scheme
 caelestia scheme set -n dynamic
