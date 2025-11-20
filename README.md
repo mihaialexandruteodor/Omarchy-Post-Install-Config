@@ -59,6 +59,7 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Brave Browser
 - [x] Discord (app)
 - [x] neofetch
+- [x] yazi (terminal file editor)
 - [ ] clipse (clipboard)
 - [ ] Ashell status bar
 - [x] Caelestia shell
