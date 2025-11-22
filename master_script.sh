@@ -14,6 +14,11 @@ sudo pacman -S reflector
 sudo reflector --country US --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
 sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick ueberzugpp
 
+# install SMB software for NAS accessing
+sudo pacman -S smbclient cifs-utils
+sudo mkdir -p /mnt/nas
+# check the readme for the mount command
+
 ./scripts/installer.sh
 ./scripts/plex-desktop.sh
 ./scripts/uninstaller.sh
