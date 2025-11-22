@@ -14,6 +14,7 @@
 - [Installs](#installs)
 - [Uninstalls](#uninstalls)
 - [NAS Mount](#nas-mount)
+- [Caelestia Shell](#caelestia-shell)
 - [Debugger](#debugger)
 - [Mount NTFS drive](#mount-ntfs-drive)
 - [Troubleshoot](#troubleshoot)
@@ -83,10 +84,24 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Waybar
 
 ## NAS Mount
-The mount point is already set, just run this with the appropriate IP, shared folder and credentials
+To avoid putting passwords into commands, create a credentials file:
+
+`/etc/samba/creds_nas`
+
+```
+username=your_user
+password=your_password
+```
+
+The mount point is already set, just run this with the appropriate IP and shared folder
 ```
 sudo mount -t cifs //<NAS_IP>/<SharedFolder> /mnt/nas \
-    -o username=your_user,password='your_password',uid=$(id -u),gid=$(id -g)
+    -o credentials=/etc/samba/creds_nas,uid=$(id -u),gid=$(id -g)
+
+```
+Add to /etc/fstab for automatic mounting
+```
+ //<NAS_IP>/<SharedFolder>  /mnt/nas  cifs  credentials=/etc/samba/creds_nas,uid=1000,gid=1000,_netdev  0  0
 ```
 
 ## Caelestia Shell
