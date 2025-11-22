@@ -9,6 +9,9 @@ chmod +x ./scripts/*.sh
 mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 
 # install  YAZI & deps
+sudo pacman -Syyu
+sudo pacman -S reflector
+sudo reflector --country US --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
 sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick ueberzugpp
 
 ./scripts/installer.sh
