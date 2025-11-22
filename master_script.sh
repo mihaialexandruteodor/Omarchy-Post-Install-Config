@@ -9,7 +9,7 @@ chmod +x ./scripts/*.sh
 mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 
 # install  YAZI & deps
-sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick
+sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick ueberzugpp
 
 ./scripts/installer.sh
 ./scripts/plex-desktop.sh
