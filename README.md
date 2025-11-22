@@ -84,24 +84,17 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Waybar
 
 ## NAS Mount
-To avoid putting passwords into commands, create a credentials file:
 
-`/etc/samba/creds_nas`
-
+The mount point is already set, just run this with the appropriate IP
 ```
-username=your_user
-password=your_password
-```
-
-The mount point is already set, just run this with the appropriate IP and shared folder
-```
-sudo mount -t cifs //<NAS_IP>/<SharedFolder> /mnt/nas \
-    -o credentials=/etc/samba/creds_nas,uid=$(id -u),gid=$(id -g)
+sshfs your_user@<NAS_IP>:/volume1 /mnt/nas \
+    -o uid=$(id -u),gid=$(id -g)
 
 ```
-Add to /etc/fstab for automatic mounting
+`/etc/fstab` entry (optional)
+
 ```
- //<NAS_IP>/<SharedFolder>  /mnt/nas  cifs  credentials=/etc/samba/creds_nas,uid=1000,gid=1000,_netdev  0  0
+your_user@<NAS_IP>:/volume1  /mnt/nas  fuse.sshfs  _netdev,uid=1000,gid=1000,IdentityFile=/home/<you>/.ssh/id_rsa,allow_other  0  0
 ```
 
 ## Caelestia Shell
