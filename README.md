@@ -84,18 +84,56 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] Waybar
 
 ## NAS Mount
+On Synology DSM:
 
-The mount point is already set, just run this with the appropriate IP
+Go to Control Panel → Terminal & SNMP → Terminal
+
+Make sure Enable SSH service is checked
+
+Note the port (default 22)
+
+Generate an SSH key (if you haven’t yet)
 ```
-sshfs your_user@<NAS_IP>:/volume1 /mnt/nas \
-    -o uid=$(id -u),gid=$(id -g)
+ssh-keygen -t ed25519 -f ~/.ssh/id_nas -C "NAS mount"
+```
+Press Enter for default path (~/.ssh/id_nas)
+
+Leave passphrase empty for automatic mounting (or use ssh-agent)
+
+Copy the key to the NAS
 
 ```
-`/etc/fstab` entry (optional)
+ssh-copy-id -i ~/.ssh/id_nas.pub your_user@<NAS_IP>
 
 ```
-your_user@<NAS_IP>:/volume1  /mnt/nas  fuse.sshfs  _netdev,uid=1000,gid=1000,IdentityFile=/home/<you>/.ssh/id_rsa,allow_other  0  0
+
+Test login without password:
 ```
+ssh -i ~/.ssh/id_nas your_user@<NAS_IP>
+```
+
+
+Discover all Synology shared folders (automatic)
+
+```
+smbclient -L //<NAS_IP> -U YOUR_NAS_USER -g | grep "Disk|" | cut -d'|' -f2
+```
+
+Add fstab entry (automatic mounting, no typing)
+
+nvim to `/etc/fstab` 
+```
+your_user@<NAS_IP>:/volume1  /mnt/nas  fuse.sshfs  IdentityFile=/home/your_user/.ssh/id_nas,allow_other,uid=1000,gid=1000,_netdev  0 0
+
+```
+Test sshfs mount
+```
+sshfs -o IdentityFile=~/.ssh/id_nas,allow_other,uid=$(id -u),gid=$(id -g) your_user@<NAS_IP>:/volume1 /mnt/nas
+
+```
+If no errors → you're done.
+
+Now EVERY shared folder will auto-mount at boot.
 
 ## Caelestia Shell
 ### set wallpaper
