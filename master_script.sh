@@ -18,6 +18,7 @@ sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagi
 sudo pacman -S sshfs
 sudo mkdir -p /mnt/nas
 sudo chown $(id -u):$(id -g) /mnt/nas
+sudo sed -i 's/^#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 sudo mkdir -p /etc/samba && sudo tee /etc/samba/smb.conf > /dev/null <<EOF
 [global]
