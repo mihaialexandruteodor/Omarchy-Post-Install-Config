@@ -17,6 +17,7 @@ sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagi
 # install SMB software for NAS accessing
 sudo pacman -S sshfs
 sudo mkdir -p /mnt/nas
+sudo chown $(id -u):$(id -g) /mnt/nas
 
 sudo mkdir -p /etc/samba && sudo tee /etc/samba/smb.conf > /dev/null <<EOF
 [global]
