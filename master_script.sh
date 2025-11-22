@@ -17,6 +17,16 @@ sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagi
 # install SMB software for NAS accessing
 sudo pacman -S sshfs
 sudo mkdir -p /mnt/nas
+
+sudo mkdir -p /etc/samba && sudo tee /etc/samba/smb.conf > /dev/null <<EOF
+[global]
+   client min protocol = SMB2
+   client max protocol = SMB3
+   workgroup = WORKGROUP
+   security = user
+EOF
+
+
 # check the readme for the mount command
 
 ./scripts/installer.sh
