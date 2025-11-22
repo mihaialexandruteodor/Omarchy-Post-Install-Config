@@ -8,6 +8,9 @@ chmod +x ./scripts/*.sh
 # overwrite alacritty config
 mv -f ./scripts/alacritty.toml "$HOME/.config/alacritty/alacritty.toml"
 
+# install  YAZI & deps
+sudo pacman -S yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick
+
 ./scripts/installer.sh
 ./scripts/plex-desktop.sh
 ./scripts/uninstaller.sh
