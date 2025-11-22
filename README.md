@@ -112,13 +112,6 @@ Test login without password:
 ssh -i ~/.ssh/id_nas your_user@<NAS_IP>
 ```
 
-
-Discover all Synology shared folders (automatic)
-
-```
-smbclient -L //<NAS_IP> -U YOUR_NAS_USER -g | grep "Disk|" | cut -d'|' -f2
-```
-
 Add fstab entry (automatic mounting, no typing)
 
 nvim to `/etc/fstab` 
