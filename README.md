@@ -13,6 +13,7 @@
   - [Run master script](#run-master-script)
 - [Installs](#installs)
 - [Uninstalls](#uninstalls)
+- [NAS Mount](#nas-mount)
 - [Debugger](#debugger)
 - [Mount NTFS drive](#mount-ntfs-drive)
 - [Troubleshoot](#troubleshoot)
@@ -80,6 +81,13 @@ chmod +x ./master_script.sh && ./master_script.sh
 - [x] 1Password
 - [x] Signal
 - [x] Waybar
+
+## NAS Mount
+The mount point is already set, just run this with the appropriate IP, shared folder and credentials
+```
+sudo mount -t cifs //<NAS_IP>/<SharedFolder> /mnt/nas \
+    -o username=your_user,password='your_password',uid=$(id -u),gid=$(id -g)
+```
 
 ## Caelestia Shell
 ### set wallpaper
