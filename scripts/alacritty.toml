@@ -14,7 +14,7 @@ size = 15
 padding.x = 14
 padding.y = 14
 decorations = "None"
-# 30% transparency means an opacity of 0.7 (70% opaque)
+# 20% transparency means an opacity of 0.8 (80% opaque)
 opacity = 0.8
 # Increases the startup size (measured in columns/lines, not pixels)
 dimensions = { columns = 100, lines = 30 }
