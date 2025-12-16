@@ -21,6 +21,7 @@ dimensions = { columns = 100, lines = 30 }
 
 [keyboard]
 bindings = [
+  { key = "Q", mods = "Super", action = "Quit" },
   { key = "Insert", mods = "Shift", action = "Paste" },
   { key = "Insert", mods = "Control", action = "Copy" }
 ]
